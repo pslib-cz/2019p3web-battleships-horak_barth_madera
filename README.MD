@@ -1,1 +1,1 @@
-# The Naval Battle by Hor�kovci
+## Dekadentní iluzionistický symbolismus 
