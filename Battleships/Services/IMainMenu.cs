@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Battleships.Models
+namespace Battleships.Services
 {
-    public class Game
+    interface IMainMenu //připojení do hry, vytvoření hry, zobrazení hry
     {
-
     }
 }

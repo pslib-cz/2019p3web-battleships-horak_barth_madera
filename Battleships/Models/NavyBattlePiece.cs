@@ -5,8 +5,7 @@ using System.Threading.Tasks;
 
 namespace Battleships.Models
 {
-    public class Game
+    public class NavyBattlePiece
     {
-
     }
 }
