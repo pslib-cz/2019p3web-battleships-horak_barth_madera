@@ -2,5 +2,5 @@
 
 ## Rozdělení rolí
 - Horák   - Návrh DB, Herní logika 
-- Barth   -
+- Barth   - herní management, identity
 - Maděra  -
