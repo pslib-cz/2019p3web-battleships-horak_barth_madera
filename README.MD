@@ -5,4 +5,4 @@
 - Barth   - herní management, identity
 - Maděra  -
 
-![Návrh databáze](https://imgur.com/a/KKmQtPZ)
+![Návrh databáze](https://i.imgur.com/Y8Mulbk.jpg)
