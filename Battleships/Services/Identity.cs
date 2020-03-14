@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Battleships.Services
 {
-    public class MyServices
+    public class Identity
     {
         readonly IHttpContextAccessor httpAccessor;
-        public MyServices(IHttpContextAccessor httpContext)
+        public Identity(IHttpContextAccessor httpContext)
         {
             this.httpAccessor = httpContext;
         }
