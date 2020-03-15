@@ -1,7 +1,7 @@
 # Battleships - Horák, Barth, Maděra
 
 ## Rozdělení rolí
-- Horák   - Návrh DB, Herní logika 
+- Horák   - Návrh DB, Herní logika, html/css  
 - Barth   - herní management, identity
 - Maděra  -
 
