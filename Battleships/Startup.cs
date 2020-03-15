@@ -12,6 +12,8 @@ using Battleships.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Http;
+using Battleships.Models;
 
 namespace Battleships
 {

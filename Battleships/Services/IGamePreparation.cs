@@ -7,5 +7,6 @@ namespace Battleships.Services
 {
     interface IGamePreparation //umisťování lodí, atd.
     {
+
     }
 }
