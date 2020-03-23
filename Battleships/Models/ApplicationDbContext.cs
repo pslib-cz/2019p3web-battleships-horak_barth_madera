@@ -7,18 +7,16 @@ using System.Threading.Tasks;
 
 namespace Battleships.Models
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
-        public DbSet<Ship> Ships { get; set; }
-        public DbSet<Game> Games { get; set; }
-        public DbSet<UserGame> UserGames { get; set; }
-        public DbSet<ShipGame> ShipGames { get; set; }
-        public DbSet<ShipPiece> ShipPieces { get; set; }
         
+        public DbSet<Game> Games { get; set; }
+        public DbSet<UserGame> UserGames { get; set; }       
         public DbSet<NavyBattlePiece> NavyBattlePieces { get; set; }
         
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
+
         }
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
@@ -27,6 +25,8 @@ namespace Battleships.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Ship>().HasData(new Ship { Id = 1, Name = "Konstantinův křižník." });
         }
