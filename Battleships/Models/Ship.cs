@@ -11,8 +11,7 @@ namespace Battleships.Models
         public string Name { get; set; }
 
         public ICollection<ShipPiece> ShipPieces { get; set; }
-        public ICollection<ShipGame> ShipGames { get; set; }
-        public ICollection<ShipUser> ShipUsers { get; set; } //
+        public ICollection<ShipGame> ShipGames { get; set; }        
         public ICollection<NavyBattlePiece> NavyBattlePieces { get; set; }
     }
 }
