@@ -13,7 +13,5 @@ namespace Battleships.Services
         bool CreateGame();
         bool DeleteGame();
         void JoinGame();
-
-
     }
 }
