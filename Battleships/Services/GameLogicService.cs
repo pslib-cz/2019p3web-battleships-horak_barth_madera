@@ -8,6 +8,7 @@ namespace Battleships.Services
 {
     public class GameLogicService
     {
+        public ApplicationDbContext _db { get; set; }
         public GameLogicService(ApplicationDbContext context)
         {
 
