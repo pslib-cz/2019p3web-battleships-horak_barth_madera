@@ -26,6 +26,12 @@ namespace Battleships.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserGame>()
+            .HasOne(ug => ug.User)
+            .WithMany(u => u.Games)
+            .HasForeignKey(ug => ug.UserId)
+            .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<UserGame>()
             .HasOne(ug => ug.Game)
             .WithMany(g => g.UserGames)
             .HasForeignKey(ug => ug.GameId)
