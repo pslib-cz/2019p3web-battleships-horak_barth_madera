@@ -15,7 +15,6 @@ namespace Battleships.Services
         {
             _db = db;
             _session = session;
-
         }
     }
 }
