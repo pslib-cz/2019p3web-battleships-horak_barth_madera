@@ -11,7 +11,7 @@ namespace Battleships.Services
         public ApplicationDbContext _db { get; set; }
         public GameLogicService(ApplicationDbContext context)
         {
-
+            _db = context;
         }
     }
 }
