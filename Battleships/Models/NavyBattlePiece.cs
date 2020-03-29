@@ -19,10 +19,6 @@ namespace Battleships.Models
         [ForeignKey("UserGameId")]
         public UserGame UserGame { get; set; }
 
-        public int ShipId { get; set; } //Type
-        [ForeignKey("ShipId")]
-        public Ship Ship { get; set; }
-
         public bool Hidden { get; set; }
 
     }

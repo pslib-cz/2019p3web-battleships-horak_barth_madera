@@ -25,10 +25,14 @@ namespace Battleships.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+                modelBuilder.Entity<UserGame>()
+                .HasOne(ug => ug.Game)
+                .WithMany(g => g.UserGames)
+                .HasForeignKey(ug => ug.GameId)
+                .OnDelete(DeleteBehavior.NoAction);
             
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Ship>().HasData(new Ship { Id = 1, Name = "Konstantinův křižník." });
+            
         }
     }
 }
