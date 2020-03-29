@@ -1,9 +1,8 @@
 ﻿@page
-@model IndexModel
+@model Battleships.Pages.GamePreparationModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "GamePreparation";
 }
-
 
 <!DOCTYPE html>
 <html>
@@ -11,6 +10,10 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <style>
+    table {
+        margin: 0 auto;
+    }
+
     .center {
         width: 500px;
         display: block;
@@ -21,8 +24,13 @@
 </style>
 <body>
 
-    <img src="~/images/logo.png" class="center"/>
-   
-    <a class="btn btn-primary" asp-page="GamePreparation">Start Game</a>
+    <img src="~/images/logo.png" alt="Alternate Text" class="center"/>
+    <p>pole</p>
+
+    @for (var i = 1; i < 10; i++)
+    {
+
+    }
+
 </body>
 </html>
