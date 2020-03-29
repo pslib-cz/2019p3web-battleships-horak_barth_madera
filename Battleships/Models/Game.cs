@@ -18,14 +18,11 @@ namespace Battleships.Models
         public int GameSize { get; set; }
 
         public string CurrentPlayerId { get; set; }
-        
-        [ForeignKey("CurrentPlayerId")]
-        public IdentityUser CurrentUser { get; set; }
 
         public string OwnerId { get; set; }
         
         [ForeignKey("OwnerId")]
-        public IdentityUser User { get; set; }
+        public User User { get; set; }
 
         public ICollection<UserGame> UserGames { get; set; }
         public GameState GameState { get; set; }

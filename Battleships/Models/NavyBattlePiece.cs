@@ -15,7 +15,7 @@ namespace Battleships.Models
         public int PosX { get; set; }
         public int PosY { get; set; }
 
-        public string UserGameId { get; set; }
+        public int UserGameId { get; set; }
         [ForeignKey("UserGameId")]
         public UserGame UserGame { get; set; }
 
