@@ -1,4 +1,32 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-    <Font Name="Segoe UI" Size="9" />
+  <Class Name="Battleships.Models.Game" Collapsed="true">
+    <Position X="2.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIBAAAIAAAAAAAAAAEAAAAAAAAQAAAAAAAAAAAgKAA=</HashCode>
+      <FileName>Models\Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Battleships.Models.NavyBattlePiece" Collapsed="true">
+    <Position X="5.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAgAAAAAAAwAAAAAAAAAAAAAAAAAAkAAA=</HashCode>
+      <FileName>Models\NavyBattlePiece.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Battleships.Models.User" Collapsed="true">
+    <Position X="2.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Battleships.Models.UserGame" Collapsed="true">
+    <Position X="5.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADABAAAAQAAAAAAAEAAAgAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\UserGame.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

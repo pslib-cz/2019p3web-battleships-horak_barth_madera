@@ -10,8 +10,11 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
-    <img src="~/images/logo.png" alt="Alternate Text" class="center"/>
-
+    <img src="~/images/logo.png" alt="Alternate Text" class="center" />
+    <h1 class="text-center">Game Preparation</h1>
+    <div class="alert alert-light text-center" role="alert">
+        Place your ships!
+    </div>
     <table>
         @for (var i = 1; i < 10; i++)
         {
@@ -23,5 +26,9 @@
             </tr>
         }
     </table>
+    <div class="text-center">
+        <a class="btn btn-primary" asp-page="Index">Cancel</a>
+        <a class="btn btn-primary" asp-page="Game">Done</a>
+    </div>
 </body>
 </html>

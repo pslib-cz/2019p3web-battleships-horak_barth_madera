@@ -9,6 +9,7 @@ namespace Battleships.Services
     public class GameLogicService : IGame //Autor: Petr Horák
     {
         public ApplicationDbContext _db { get; set; }
+        
         public GameLogicService(ApplicationDbContext context)
         {
             _db = context;

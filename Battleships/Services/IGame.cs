@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Battleships.Services
 {
-    interface IGame //hra, 2 hrací pole, připojení druhého hráče, konec hry
+    public interface IGame //hra, 2 hrací pole, připojení druhého hráče, konec hry
     {
+
+
         void GetBattleField(User user); //vezme NavyBattlePieces a vytvoří pole 
 
 
