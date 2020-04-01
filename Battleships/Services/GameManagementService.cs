@@ -6,7 +6,7 @@ using Battleships.Models;
 
 namespace Battleships.Services
 {
-    public class GameManagementService //Autor: Michal Barth
+    public class GameManagementService : IGamePreparation //Autor: Michal Barth
     {
         private SessionStorage<string> _session;
         private ApplicationDbContext _db;

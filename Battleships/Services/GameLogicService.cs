@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 
 namespace Battleships.Services
 {
-    public class GameLogicService //Autor: Petr Horák
+    public class GameLogicService : IGame //Autor: Petr Horák
     {
         public ApplicationDbContext _db { get; set; }
         public GameLogicService(ApplicationDbContext context)
         {
             _db = context;
+        }
+
+        public void GetBattleField(User user)
+        {
+            throw new NotImplementedException();
         }
     }
 }
