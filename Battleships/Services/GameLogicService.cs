@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Battleships.Services
 {
-    public class GameLogicService
+    public class GameLogicService //Autor: Petr Horák
     {
         public ApplicationDbContext _db { get; set; }
         public GameLogicService(ApplicationDbContext context)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Battleships.Services
 {
-    interface IMainMenu //připojení do hry, vytvoření hry, zobrazení hry
+    interface IMainMenu //připojení do hry, vytvoření hry, zobrazení hry, vypisování her
     {
         Game GetGame();
 
