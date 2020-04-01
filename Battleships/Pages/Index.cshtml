@@ -14,7 +14,8 @@
 
     <img src="~/images/logo.png" class="center" />
 
-    <a class="btn btn-primary" asp-page="GamePreparation">Start Game</a>
+    <a class="btn btn-primary" asp-page="GamePreparation" asp-page-handler="StartGame" asp-route-size="5">Start Game (size 5×5)</a>
+    <a class="btn btn-primary" asp-page="GamePreparation" asp-page-handler="StartGame" asp-route-size="10">Start Game (size 10×10)</a>
     <a class="btn btn-primary" asp-page="GamesList">List of your games</a>
 </body>
 </html>
