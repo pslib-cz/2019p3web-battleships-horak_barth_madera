@@ -1,0 +1,12 @@
+﻿@page
+@model Battleships.Pages.GamesListModel
+@{
+    ViewData["Title"] = "GamesList";
+}
+
+<h1>GamesList</h1>
+
+@foreach (var item in Model.UserGames)
+{
+    <i>@item</i>
+}

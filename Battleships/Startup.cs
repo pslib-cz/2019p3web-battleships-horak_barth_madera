@@ -36,7 +36,6 @@ namespace Battleships
             services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddRazorPages();
 
             //dodělat services
