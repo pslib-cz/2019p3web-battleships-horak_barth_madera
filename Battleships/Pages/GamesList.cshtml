@@ -5,8 +5,12 @@
 }
 
 <h1>GamesList</h1>
-
-@foreach (var item in Model.UserGames)
-{
-    <i>@item</i>
-}
+<table>
+    @foreach (var item in Model.UserGames)
+    {
+        <tr>
+            <td><i>@item.Id</i></td>
+            <td><a class="btn btn-primary" asp-page="Game">Enter this game</a></td>
+        </tr>
+    }
+</table>

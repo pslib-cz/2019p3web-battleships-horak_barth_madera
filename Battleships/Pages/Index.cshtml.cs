@@ -9,7 +9,7 @@ using Battleships.Services;
 
 namespace Battleships.Pages
 {
-    public class IndexModel : PageModel
+    public class IndexModel : PageModel //Barth
     {
         private GameManagementService _g;
         private readonly ILogger<IndexModel> _logger;

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Battleships.Pages
 {
-    public class GamesListModel : PageModel
+    public class GamesListModel : PageModel //Barth
     {
         private ApplicationDbContext _db;
         private SessionStorage<string> _session;
@@ -24,6 +24,10 @@ namespace Battleships.Pages
 
         public void OnGet()
         {
+            foreach (var item in _db.UserGames)
+            {
+                UserGames.Add(item);
+            }
            /* UserGames =*/ /*_db.UserGames;*/ /*_session.Load("")*/
         }
     }

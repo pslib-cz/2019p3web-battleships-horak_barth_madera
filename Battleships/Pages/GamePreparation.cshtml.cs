@@ -8,7 +8,7 @@ using Battleships.Services;
 
 namespace Battleships.Pages
 {
-    public class GamePreparationModel : PageModel
+    public class GamePreparationModel : PageModel //Barth
     {
         public int GameSize;
         private SessionStorage<string> _session;
