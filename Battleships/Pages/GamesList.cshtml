@@ -6,10 +6,10 @@
 
 <h1>GamesList</h1>
 <table>
-    @foreach (var item in Model.UserGames)
+    @foreach (var item in Model.Games)
     {
         <tr>
-            <td><i>@item.Id</i></td>
+            <td><i>@item.GameId</i></td>
             <td><a class="btn btn-primary" asp-page="Game">Enter this game</a></td>
         </tr>
     }

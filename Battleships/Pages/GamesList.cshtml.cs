@@ -14,7 +14,7 @@ namespace Battleships.Pages
         private ApplicationDbContext _db;
         private SessionStorage<string> _session;
 
-        public List<UserGame> UserGames;
+        public List<Game> Games;
 
         public GamesListModel(ApplicationDbContext db, SessionStorage<string> session)
         {
@@ -24,11 +24,10 @@ namespace Battleships.Pages
 
         public void OnGet()
         {
-            foreach (var item in _db.UserGames)
+            foreach (var item in _db.Games)
             {
-                UserGames.Add(item);
+                Games.Add(item);
             }
-           /* UserGames =*/ /*_db.UserGames;*/ /*_session.Load("")*/
         }
     }
 }
