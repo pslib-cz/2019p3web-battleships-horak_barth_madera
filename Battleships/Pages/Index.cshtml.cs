@@ -11,10 +11,10 @@ namespace Battleships.Pages
 {
     public class IndexModel : PageModel //Barth
     {
-        private GameManagementService _g;
+        private IGamePreparation _g;
         private readonly ILogger<IndexModel> _logger;
 
-        public IndexModel(ILogger<IndexModel> logger, GameManagementService g)
+        public IndexModel(ILogger<IndexModel> logger, IGamePreparation g)
         {
             _logger = logger;
             _g = g;

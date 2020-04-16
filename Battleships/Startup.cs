@@ -40,8 +40,10 @@ namespace Battleships
 
             //dodělat services
             services.AddTransient<IGame,GameLogicService>();
-            services.AddTransient<IMainMenu, MainMenuService>();
+            services.AddTransient<IMainMenu, MainMenuService>();            
             services.AddTransient<IGamePreparation, GameManagementService>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             //session
             services.AddDistributedMemoryCache();
@@ -66,7 +68,7 @@ namespace Battleships
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthentication();

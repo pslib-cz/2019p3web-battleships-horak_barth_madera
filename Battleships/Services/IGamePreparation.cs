@@ -6,7 +6,7 @@ using Battleships.Models;
 
 namespace Battleships.Services
 {
-    interface IGamePreparation //umisťování lodí, atd.
+    public interface IGamePreparation //umisťování lodí, atd.
     {
         void StartGame(int gameSize);
     }
