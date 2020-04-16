@@ -22,7 +22,7 @@ namespace Battleships.Pages
 
         public void OnGet()
         {
-
+            
         }
 
         public ActionResult OnGetStartGame(int size)

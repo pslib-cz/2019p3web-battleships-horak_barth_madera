@@ -20,11 +20,12 @@ namespace Battleships.Services
         public void StartGame(int gameSize)
         {
             Game tempGame = new Game { GameId = Guid.NewGuid(), GameSize = gameSize, GameState = 0 };
-            int tempGameNum = Convert.ToInt32(tempGame.GameId);
-            _session.Save("GameId", "tempGameNum");
+            
+            _session.Save("GameId", tempGame.GameId.ToString());
             string StringGameSize = Convert.ToString(gameSize);
-            _session.Save("GameSize", "StringGameSize");
+            _session.Save("GameSize", StringGameSize);
             _db.Games.Add(tempGame);
+            _db.SaveChanges();
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Battleships.Pages
     {
         public int GameSize;
         private SessionStorage<string> _session;
+        public string sessionString;
 
         public GamePreparationModel(SessionStorage<string> session)
         {
@@ -20,7 +21,8 @@ namespace Battleships.Pages
 
         public void OnGet()
         {
-            GameSize = Convert.ToInt32(_session.Load("GameSize"));
+            sessionString = _session.Load("GameSize");
+            GameSize = Convert.ToInt32(sessionString);
         }
     }
 }
