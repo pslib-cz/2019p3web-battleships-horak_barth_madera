@@ -10,7 +10,7 @@
     {
         <tr>
             <td><i>@item.GameId</i></td>
-            <td><a class="btn btn-primary" asp-page="Game">Enter this game</a></td>
+            <td><a class="btn btn-primary" asp-page-handler="EnterGame" asp-route-value="@item.GameId">Enter this game</a></td>
         </tr>
     }
 </table>
