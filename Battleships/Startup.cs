@@ -44,12 +44,13 @@ namespace Battleships
             services.AddTransient<IGamePreparation, GameManagementService>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<Identity>();
 
             //session
             services.AddDistributedMemoryCache();
             services.AddSession();
             
-            services.AddScoped<SessionStorage<string>>();
+            services.AddScoped<SessionStorage<Guid>>();
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
