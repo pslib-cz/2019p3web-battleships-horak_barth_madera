@@ -17,6 +17,7 @@ namespace Battleships.Models
         public int MaxPlayers { get; set; }
         public int GameSize { get; set; }
 
+        // co to znamená?
         public string CurrentPlayerId { get; set; }
 
         public string OwnerId { get; set; }

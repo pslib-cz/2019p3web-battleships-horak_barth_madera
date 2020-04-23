@@ -13,14 +13,14 @@ namespace Battleships.Pages
     public class GamesListModel : PageModel //Barth
     {
         private ApplicationDbContext _db;
-        private SessionStorage<string> _session;
-
+        private SessionStorage<Guid> _session;
         public List<Game> Games;
 
-        public GamesListModel(ApplicationDbContext db, SessionStorage<string> session)
+        public GamesListModel(ApplicationDbContext db, SessionStorage<Guid> session)
         {
             _db = db;
             _session = session;
+            Games = LoadGames();
         }
 
         private List<Game> LoadGames()
@@ -30,11 +30,6 @@ namespace Battleships.Pages
 
         public void OnGet()
         {
-            _session.Save("GamesList", JsonSerializer.ToJsonString(LoadGames()));
-            for (int i = 0; i <= _db.Games.Count(); i++)
-            {
-                Games = JsonSerializer.Deserialize<List<Game>>(_session.Load("GamesList"));
-            }
         }
 
         private ActionResult OnGetEnterGame(Guid value)

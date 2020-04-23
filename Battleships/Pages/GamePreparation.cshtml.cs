@@ -5,24 +5,27 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Battleships.Services;
+using Battleships.Models;
 
 namespace Battleships.Pages
 {
     public class GamePreparationModel : PageModel //Barth
     {
-        public int GameSize;
-        private SessionStorage<string> _session;
-        public string sessionString;
+        private SessionStorage<Guid> _session;
+        private ApplicationDbContext _db;
+        public Guid _gameId;
+        public int _gameSize;
 
-        public GamePreparationModel(SessionStorage<string> session)
+        public GamePreparationModel(ApplicationDbContext db, SessionStorage<Guid> session)
         {
             _session = session;
+            _db = db;
         }
 
         public void OnGet()
         {
-            sessionString = _session.Load("GameSize");
-            GameSize = Convert.ToInt32(sessionString);
+            _gameId = _session.Load("GameId");
+            _gameSize = 5; /* <--   _db.Games (where GameId == _gameId).GameSize*/
         }
     }
 }

@@ -23,19 +23,18 @@ namespace Battleships.Services
         {
             if (_activeUser == "") return;
 
-            Game tempGame = new Game { 
-                GameId = Guid.NewGuid(), 
+            Game tempGame = new Game {
+                GameId = Guid.NewGuid(),
+                MaxPlayers = 2,
                 GameSize = gameSize, 
                 GameState = Models.Enums.GameState.Setup,
                 OwnerId = _activeUser };
 
-            UserGame ug = new UserGame();
-            ug.GameId = tempGame.GameId;
-            ug.UserId = _activeUser;
+            UserGame ug = new UserGame {
+                GameId = tempGame.GameId,
+                UserId = _activeUser };
 
             _session.Save("GameId", tempGame.GameId);
-            string StringGameSize = Convert.ToString(gameSize);
-            //_session.Save("GameSize", StringGameSize);
             _db.Games.Add(tempGame);
             _db.UserGames.Add(ug);
             _db.SaveChanges();
