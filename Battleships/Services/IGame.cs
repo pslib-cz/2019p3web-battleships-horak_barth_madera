@@ -10,7 +10,7 @@ namespace Battleships.Services
     {
 
 
-        void GetBattleField(User user); //vezme NavyBattlePieces a vytvoří pole 
+        void CreateBattleField(UserGame userGame, Game game); //vytvoří NavyBattlePieces a vytvoří pole 
 
 
     }

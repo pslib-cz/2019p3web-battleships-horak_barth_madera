@@ -15,9 +15,18 @@ namespace Battleships.Services
             _db = context;
         }
 
-        public void GetBattleField(User user)
+        public void CreateBattleField(UserGame userGame, Game game) //funguje - v db jsou přeházené PosX PosY - složitější vypisování
         {
-            throw new NotImplementedException();
+
+            for (int x = 0; x < game.GameSize; x++)
+            {
+                for (int y = 0; y < game.GameSize; y++)
+                {
+                    _db.NavyBattlePieces.Add(new NavyBattlePiece { UserGame = userGame, PosX = x, PosY = y, Hidden = false });
+
+                }
+            }
+            _db.SaveChanges();
         }
     }
 }

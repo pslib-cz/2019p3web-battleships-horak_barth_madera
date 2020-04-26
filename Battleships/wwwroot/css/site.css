@@ -75,7 +75,7 @@ body {
 td{
     border:solid 1px;
     border-color: black;    
-    width:40px;
+    width:auto;
     height: 40px;
 }
 table {

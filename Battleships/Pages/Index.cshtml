@@ -3,7 +3,10 @@
 @{
     ViewData["Title"] = "Home page";
 }
-
+@using Microsoft.AspNetCore.Identity
+@using Battleships.Models
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 
 <!DOCTYPE html>
 <html>
@@ -11,11 +14,27 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
-
     <img src="~/images/logo.png" class="center" />
 
-    <a class="btn btn-primary" asp-page-handler="StartGame" asp-route-size="5">Start Game (size 5×5)</a>
-    <a class="btn btn-primary" asp-page-handler="StartGame" asp-route-size="10">Start Game (size 10×10)</a>
-    <a class="btn btn-primary" asp-page="GamesList">List your games</a>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <a class="btn btn-primary" asp-page-handler="StartGame" asp-route-size="5">Start Game (size 5×5)</a>
+        <a class="btn btn-primary" asp-page-handler="StartGame" asp-route-size="10">Start Game (size 10×10)</a>
+        <a class="btn btn-primary" asp-page="GamesList">List your games</a>
+    }
+    else
+    {
+
+        <div class="jumbotron">
+            <h1 class="display-4 text-center">Login required</h1>          
+            <hr class="my-4">
+            
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </div>
+    }
+
+
+
 </body>
 </html>

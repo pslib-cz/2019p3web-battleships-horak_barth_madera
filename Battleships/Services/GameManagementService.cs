@@ -11,12 +11,14 @@ namespace Battleships.Services
         private SessionStorage<Guid> _session;
         private ApplicationDbContext _db;
         private string _activeUser;
+        private IGame _gameLogicService;
 
-        public GameManagementService(ApplicationDbContext db, Identity identity, SessionStorage<Guid> session)
+        public GameManagementService(ApplicationDbContext db, Identity identity, SessionStorage<Guid> session, IGame gameLogicService)
         {
             _db = db;
             _session = session;
             _activeUser = identity.LoginId;
+            _gameLogicService = gameLogicService;
         }
 
         public void StartGame(int gameSize)
@@ -38,6 +40,9 @@ namespace Battleships.Services
             _db.Games.Add(tempGame);
             _db.UserGames.Add(ug);
             _db.SaveChanges();
+
+            //P.H. 26.4. - Vytvoření hracího pole
+            _gameLogicService.CreateBattleField(ug, tempGame);
         }
     }
 }
