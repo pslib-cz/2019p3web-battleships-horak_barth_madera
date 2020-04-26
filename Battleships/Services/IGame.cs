@@ -11,7 +11,9 @@ namespace Battleships.Services
 
 
         void CreateBattleField(UserGame userGame, Game game); //vytvoří NavyBattlePieces a vytvoří pole 
-
-
+        Game GetGame(Guid gameId);
+        Game GetGame(int userGameId);
+        NavyBattlePiece GetNavyBattlePiece(Guid gameId);
+        List<NavyBattlePiece> GetBattleField(Guid gameId);
     }
 }

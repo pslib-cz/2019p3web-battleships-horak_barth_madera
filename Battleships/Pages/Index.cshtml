@@ -26,11 +26,13 @@
     {
 
         <div class="jumbotron">
-            <h1 class="display-4 text-center">Login required</h1>          
+            <h2 class="display-4 text-center">Login required</h2>          
             <hr class="my-4">
+            <div class="text-center">
+                <a class="btn btn-secondary" style="margin-right: 30px" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                <a class="btn btn-light"  asp-area="Identity" asp-page="/Account/Register">Register</a>
+            </div>
             
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
         </div>
     }
 

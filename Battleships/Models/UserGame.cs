@@ -15,12 +15,12 @@ namespace Battleships.Models
         public Guid GameId { get; set; }
         [ForeignKey("GameId")]
         public Game Game { get; set; }
-        public int GameSize { get; set; }
+        
 
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public User User { get; set; }
-        public GameState GameState { get; set; }
+        
 
         public ICollection<NavyBattlePiece> NavyBattlePieces { get; set; }
         public PlayerState PlayerState { get; set; }

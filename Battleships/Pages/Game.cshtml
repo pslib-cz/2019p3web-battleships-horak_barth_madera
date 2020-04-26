@@ -4,5 +4,29 @@
     ViewData["Title"] = "Game";
 }
 
-<h1>Game</h1>
 
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <img src="~/images/logo.png" alt="Alternate Text" class="center" />
+    <h1 class="text-center">Game</h1>
+    <div class="alert alert-light text-center" role="alert">
+        Výpis z DB: (předělat do PartialView - upravit - přidat na ostatní stránky)
+    </div>
+    <table>
+        @foreach (var item in Model.Pieces)
+        {
+            <tr>
+                <td>@item.PosX - @item.PosY</td>
+            </tr>
+        }
+    </table>
+    <div class="text-center">
+        <a class="btn btn-primary" asp-page="Index">Cancel</a>
+        <a class="btn btn-primary" asp-page="Game">Done</a>
+    </div>
+</body>
+</html>
