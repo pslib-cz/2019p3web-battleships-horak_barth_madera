@@ -17,7 +17,7 @@ namespace Battleships.Services
             
         }
 
-        public void CreateBattleField(UserGame userGame, Game game)
+        public void CreateBattleField(UserGame userGame, Game game) //jen usergame
         {
 
             for (int x = 0; x < game.GameSize; x++)
@@ -25,11 +25,11 @@ namespace Battleships.Services
                 for (int y = 0; y < game.GameSize; y++)
                 {
                     _db.NavyBattlePieces.Add(new NavyBattlePiece { UserGame = userGame, PosX = x, PosY = y, Hidden = false });
-                    _db.SaveChanges();
+                    
                 }
-                _db.SaveChanges();
+                
             }
-            
+            _db.SaveChanges();
         }
 
         public Game GetGame(Guid gameId)
@@ -52,16 +52,19 @@ namespace Battleships.Services
         public List<NavyBattlePiece> GetBattleField(Guid gameId)
         {
             var ug = _db.UserGames.SingleOrDefault(x => x.GameId == gameId);
-            //battlePieces.Add(_db.NavyBattlePieces.SingleOrDefault(x => x.UserGameId == ug.Id));
+
+
+            //List<NavyBattlePiece> battlePieces = new List<NavyBattlePiece>();
+            //foreach (var item in _db.NavyBattlePieces.Where(x => x.UserGameId == ug.Id))
+            //{
+            //    battlePieces.Add(item);
+            //}
+
             //return battlePieces;
 
-            List<NavyBattlePiece> battlePieces = new List<NavyBattlePiece>();
-
-            foreach (var item in _db.NavyBattlePieces.Where(x => x.UserGameId == ug.Id))
-            {
-                battlePieces.Add(item);
-            }
-            return battlePieces;
+            return _db.NavyBattlePieces.Where(x => x.UserGameId == ug.Id).ToList(); //seřadit
         }
+
+        //metoda - vrací polepolí 
     }
 }

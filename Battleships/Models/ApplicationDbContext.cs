@@ -21,6 +21,8 @@ namespace Battleships.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<UserGame>()
             .HasOne(ug => ug.User)
             .WithMany(u => u.Games)
@@ -33,8 +35,9 @@ namespace Battleships.Models
             .HasForeignKey(ug => ug.GameId)
             .OnDelete(DeleteBehavior.NoAction);
             
-            base.OnModelCreating(modelBuilder);
             
+
+            modelBuilder.Entity<NavyBattlePiece>().HasIndex(x => new { x.PosX, x.PosY });
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Battleships.Pages
             _sessionGuid = sessionGuid;
             _sessionInt = sessionInt;
             _gameId = sessionGuid.Load("GameId");
-            _gameSize = sessionInt.Load("Size");
+            _gameSize = sessionInt.Load("Size"); // zrušit
             
         }
 
