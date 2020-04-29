@@ -28,9 +28,11 @@ namespace Battleships.Services
             Game tempGame = new Game {
                 GameId = Guid.NewGuid(),
                 MaxPlayers = 2,
-                GameSize = gameSize, 
+                GameSize = gameSize,
                 GameState = Models.Enums.GameState.Setup,
-                OwnerId = _activeUser };
+                OwnerId = _activeUser,
+                CurrentPlayerId = _activeUser
+            };
 
             UserGame ug = new UserGame {
                 GameId = tempGame.GameId,
@@ -43,6 +45,31 @@ namespace Battleships.Services
 
             //P.H. 26.4. - Vytvoření hracího pole
             _gameLogicService.CreateBattleField(ug, tempGame);
+        }
+
+        public List<Game> LoadAllGames()
+        {
+            return _db.Games.ToList();
+        }
+
+        public List<Game> LoadActiveGames()
+        {
+            return _db.Games.Where(x => x.CurrentPlayerId == _activeUser).ToList();
+        }
+
+        public Game LoadGame(Guid value)
+        {
+            Game game = new Game
+            {
+                GameId = value,
+                MaxPlayers = _db.Games.SingleOrDefault(x => x.GameId == value).MaxPlayers,
+                GameSize = _db.Games.SingleOrDefault(x => x.GameId == value).GameSize,
+                GameState = _db.Games.SingleOrDefault(x => x.GameId == value).GameState,
+                OwnerId = _db.Games.SingleOrDefault(x => x.GameId == value).OwnerId,
+                CurrentPlayerId = _db.Games.SingleOrDefault(x => x.GameId == value).CurrentPlayerId
+            };
+
+            return game;
         }
     }
 }

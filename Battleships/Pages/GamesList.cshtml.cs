@@ -14,18 +14,17 @@ namespace Battleships.Pages
     {
         private ApplicationDbContext _db;
         private SessionStorage<Guid> _session;
-        public List<Game> Games;
+        public List<Game> AllGames;
+        public List<Game> ActiveGames;
+        private IGamePreparation _gp;
 
-        public GamesListModel(ApplicationDbContext db, SessionStorage<Guid> session)
+        public GamesListModel(ApplicationDbContext db, SessionStorage<Guid> session, IGamePreparation gp)
         {
             _db = db;
             _session = session;
-            Games = LoadGames();
-        }
-
-        private List<Game> LoadGames()
-        {
-            return (from p in _db.Games /*orderby Guid.NewGuid()*/ select p).Take(10).ToList();
+            _gp = gp;
+            AllGames = _gp.LoadAllGames();
+            ActiveGames = _gp.LoadActiveGames();
         }
 
         public void OnGet()
@@ -34,7 +33,7 @@ namespace Battleships.Pages
 
         private ActionResult OnGetEnterGame(Guid value)
         {
-            //načíst data dané hry
+            _session.Save("EnterId", value);
             return RedirectToPage("./GamePreparation");
         }
     }

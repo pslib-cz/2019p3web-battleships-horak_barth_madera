@@ -9,5 +9,11 @@ namespace Battleships.Services
     public interface IGamePreparation //umisťování lodí, atd.
     {
         void StartGame(int gameSize);
+
+        List<Game> LoadAllGames();
+
+        List<Game> LoadActiveGames();
+
+        Game LoadGame(Guid value);
     }
 }

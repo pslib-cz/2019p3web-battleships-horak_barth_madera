@@ -16,10 +16,10 @@
         Place your ships!
     </div>
     <table>
-        @for (var i = 0; i < Model._gameSize; i++)
+        @for (var i = 0; i < Model.LoadedGame.GameSize; i++)
         {
             <tr>
-                @for (var d = 0; d < Model._gameSize; d++)
+                @for (var d = 0; d < Model.LoadedGame.GameSize; d++)
                 {
                 <td>x = @d; y = @i; </td>
                 }

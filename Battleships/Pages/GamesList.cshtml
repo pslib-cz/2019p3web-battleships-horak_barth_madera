@@ -6,7 +6,17 @@
 
 <h1>GamesList</h1>
 <table>
-    @foreach (var item in Model.Games)
+    <h3>Všechny hry</h3>
+    @foreach (var item in Model.AllGames)
+    {
+        <tr>
+            <td><i>@item.GameId</i></td>
+            <td><a class="btn btn-primary" asp-page-handler="EnterGame" asp-route-value="@item.GameId">Enter this game</a></td>
+        </tr>
+    }
+
+    <h3>Hry, kde jste na tahu</h3>
+    @foreach (var item in Model.ActiveGames)
     {
         <tr>
             <td><i>@item.GameId</i></td>

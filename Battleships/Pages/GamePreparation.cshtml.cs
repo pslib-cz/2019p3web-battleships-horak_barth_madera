@@ -12,20 +12,20 @@ namespace Battleships.Pages
     public class GamePreparationModel : PageModel //Barth
     {
         private SessionStorage<Guid> _session;
-        private ApplicationDbContext _db;
         public Guid _gameId;
-        public int _gameSize;
+        private IGamePreparation _gp;
+        public Game LoadedGame;
 
-        public GamePreparationModel(ApplicationDbContext db, SessionStorage<Guid> session)
+        public GamePreparationModel(IGamePreparation gp, SessionStorage<Guid> session)
         {
             _session = session;
-            _db = db;
+            _gp = gp;
+            _gameId = _session.Load("GameId");
+            LoadedGame = _gp.LoadGame(_gameId);
         }
 
         public void OnGet()
         {
-            _gameId = _session.Load("GameId");
-            _gameSize = 5; /* <--   _db.Games (where GameId == _gameId).GameSize*/
         }
     }
 }
