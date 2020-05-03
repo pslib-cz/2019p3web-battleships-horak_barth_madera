@@ -17,23 +17,20 @@ namespace Battleships.Pages
         public Guid _gameId;
         public int _gameSize;
 
-        public List<NavyBattlePiece> Pieces;
-        public NavyBattlePiece Piece;
+        public List<List<NavyBattlePiece>> PlayingField;
+        
 
-        public GameModel(IGame game, SessionStorage<Guid> sessionGuid, SessionStorage<int> sessionInt)
+        public GameModel(IGame game, SessionStorage<Guid> sessionGuid)
         {
             _gameService = game;
-            _sessionGuid = sessionGuid;
-            _sessionInt = sessionInt;
-            _gameId = sessionGuid.Load("GameId");
-            _gameSize = sessionInt.Load("Size"); // zrušit
-            
+            _sessionGuid = sessionGuid;            
+            _gameId = sessionGuid.Load("GameId");                     
         }
 
         public void OnGet()
         {
-            Pieces = _gameService.GetBattleField(_gameId);
-            Piece = _gameService.GetNavyBattlePiece(_gameId);
+            PlayingField = _gameService.GetBattlefield(_gameId);
+            
         }
     }
 }

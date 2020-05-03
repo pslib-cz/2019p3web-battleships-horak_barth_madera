@@ -56,8 +56,7 @@ namespace Battleships
             services.AddDistributedMemoryCache();
             services.AddSession();
             
-            services.AddScoped<SessionStorage<Guid>>();
-            services.AddScoped<SessionStorage<int>>();
+            services.AddScoped<SessionStorage<Guid>>();           
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -17,12 +17,13 @@ namespace Battleships.Services
             
         }
 
-        public void CreateBattleField(UserGame userGame, Game game) //jen usergame
+        public void CreateBattleField(UserGame userGame) //jen usergame - HOTOVO
         {
+            var g = _db.Games.SingleOrDefault(x => x.GameId == userGame.GameId);
 
-            for (int x = 0; x < game.GameSize; x++)
+            for (int x = 0; x < g.GameSize; x++)
             {
-                for (int y = 0; y < game.GameSize; y++)
+                for (int y = 0; y < g.GameSize; y++)
                 {
                     _db.NavyBattlePieces.Add(new NavyBattlePiece { UserGame = userGame, PosX = x, PosY = y, Hidden = false });
                     
@@ -43,13 +44,13 @@ namespace Battleships.Services
         }
 
 
-        public NavyBattlePiece GetNavyBattlePiece(Guid gameId) 
+        public NavyBattlePiece GetNavyBattlePiece(Guid gameId)  // není potřeba moc - pouze testovací
         {
             var ug = _db.UserGames.SingleOrDefault(x => x.GameId == gameId);
             return _db.NavyBattlePieces.FirstOrDefault(x => x.UserGameId == ug.Id);
         }
 
-        public List<NavyBattlePiece> GetBattleField(Guid gameId)
+        public List<NavyBattlePiece> GetBattlePieces(Guid gameId)
         {
             var ug = _db.UserGames.SingleOrDefault(x => x.GameId == gameId);
 
@@ -62,9 +63,36 @@ namespace Battleships.Services
 
             //return battlePieces;
 
-            return _db.NavyBattlePieces.Where(x => x.UserGameId == ug.Id).ToList(); //seřadit
+            return _db.NavyBattlePieces.Where(x => x.UserGameId == ug.Id).OrderBy(x => x.PosX).OrderBy(x => x.PosY).ToList(); //seřadit
         }
 
         //metoda - vrací polepolí 
+        private List<NavyBattlePiece> GetExactNavyBattlePieces(Guid gameId, int Xposition) 
+        {
+            return GetBattlePieces(gameId).Where(x => x.PosX == Xposition).ToList();
+        }
+
+        public List<List<NavyBattlePiece>> GetBattlefield(Guid gameId)
+        {
+            List<List<NavyBattlePiece>> battlefield = new List<List<NavyBattlePiece>>();
+            
+            
+
+            var g = _db.Games.SingleOrDefault(x => x.GameId == gameId);
+
+            for (int x = 0; x < g.GameSize; x++)
+            {
+                List<NavyBattlePiece> column = new List<NavyBattlePiece>();
+
+                foreach (var item in GetExactNavyBattlePieces(gameId, x))
+                {
+                    column.Add(item);
+                }
+
+                battlefield.Add(column);
+            }
+
+            return battlefield;
+        }
     }
 }

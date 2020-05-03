@@ -17,10 +17,13 @@
         Výpis z DB: (předělat do PartialView - upravit - přidat na ostatní stránky)
     </div>
     <table>
-        @foreach (var item in Model.Pieces)
+        @foreach (var item in Model.PlayingField)
         {
             <tr>
-                <td>@item.PosX - @item.PosY</td>
+                @foreach (var item2 in item)
+                {
+                <td>@item2.PosX - @item2.PosY</td>
+                }               
             </tr>
         }
     </table>
