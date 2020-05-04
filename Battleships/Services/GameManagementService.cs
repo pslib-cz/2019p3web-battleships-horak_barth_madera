@@ -59,14 +59,16 @@ namespace Battleships.Services
 
         public Game LoadGame(Guid value)
         {
+            var temp = _db.Games.SingleOrDefault(x => x.GameId == value);
+
             Game game = new Game
             {
                 GameId = value,
-                MaxPlayers = _db.Games.SingleOrDefault(x => x.GameId == value).MaxPlayers,
-                GameSize = _db.Games.SingleOrDefault(x => x.GameId == value).GameSize,
-                GameState = _db.Games.SingleOrDefault(x => x.GameId == value).GameState,
-                OwnerId = _db.Games.SingleOrDefault(x => x.GameId == value).OwnerId,
-                CurrentPlayerId = _db.Games.SingleOrDefault(x => x.GameId == value).CurrentPlayerId
+                MaxPlayers = temp.MaxPlayers,
+                GameSize = temp.GameSize,
+                GameState = temp.GameState,
+                OwnerId = temp.OwnerId,
+                CurrentPlayerId = temp.CurrentPlayerId
             };
 
             return game;
