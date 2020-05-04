@@ -25,7 +25,7 @@ namespace Battleships.Services
             {
                 for (int y = 0; y < g.GameSize; y++)
                 {
-                    _db.NavyBattlePieces.Add(new NavyBattlePiece { UserGame = userGame, PosX = x, PosY = y, Hidden = false });
+                    _db.NavyBattlePieces.Add(new NavyBattlePiece { UserGame = userGame, PosX = x, PosY = y, Hidden = true });
                     
                 }
                 
@@ -63,20 +63,20 @@ namespace Battleships.Services
 
             //return battlePieces;
 
-            return _db.NavyBattlePieces.Where(x => x.UserGameId == ug.Id).OrderBy(x => x.PosX).OrderBy(x => x.PosY).ToList(); //seřadit
+            return _db.NavyBattlePieces.Where(x => x.UserGameId == ug.Id).OrderBy(x => new{  x.PosY, x.PosX } ).ToList(); //seřadit
         }
 
         //metoda - vrací polepolí 
         private List<NavyBattlePiece> GetExactNavyBattlePieces(Guid gameId, int Xposition) 
         {
-            return GetBattlePieces(gameId).Where(x => x.PosX == Xposition).ToList();
+            return GetBattlePieces(gameId).Where(x => x.PosX == Xposition).ToList(); //seřadit
         }
 
         public List<List<NavyBattlePiece>> GetBattlefield(Guid gameId)
         {
             List<List<NavyBattlePiece>> battlefield = new List<List<NavyBattlePiece>>();
             
-            
+            // k db jenom jednou GetBattlePieces do Listu
 
             var g = _db.Games.SingleOrDefault(x => x.GameId == gameId);
 

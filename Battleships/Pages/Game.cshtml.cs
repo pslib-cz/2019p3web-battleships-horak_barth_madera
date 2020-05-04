@@ -13,7 +13,7 @@ namespace Battleships.Pages
     {
         private IGame _gameService;
         private SessionStorage<Guid> _sessionGuid;
-        private SessionStorage<int> _sessionInt;
+        
         public Guid _gameId;
         public int _gameSize;
 
