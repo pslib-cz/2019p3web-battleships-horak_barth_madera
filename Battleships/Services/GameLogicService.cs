@@ -64,13 +64,13 @@ namespace Battleships.Services
             //return battlePieces;
 
             //return _db.NavyBattlePieces.Where(x => x.UserGameId == ug.Id).OrderBy(x => new{  x.PosY, x.PosX } ).ToList(); //SPRÁVNĚ
-            return _db.NavyBattlePieces.Where(x => x.UserGameId == ug.Id).OrderBy(x => x.PosX).ThenBy(x => x.PosY).ToList(); //asi taky teď už
+            return _db.NavyBattlePieces.Where(x => x.UserGameId == ug.Id).OrderBy(x => x.PosY).ThenBy(x => x.PosX).ToList(); //asi taky teď už
         }
 
         //metoda - vrací polepolí 
-        private List<NavyBattlePiece> GetExactNavyBattlePieces(Guid gameId, int Xposition) 
+        private List<NavyBattlePiece> GetExactNavyBattlePieces(Guid gameId, int Yposition) 
         {
-            return GetBattlePieces(gameId).Where(x => x.PosX == Xposition).ToList(); //seřadit
+            return GetBattlePieces(gameId).Where(x => x.PosY == Yposition).ToList(); //seřadit
         }
 
         public List<List<NavyBattlePiece>> GetBattlefield(Guid gameId)
@@ -89,9 +89,11 @@ namespace Battleships.Services
                 {
                     column.Add(item);
                 }
-
+                
                 battlefield.Add(column);
             }
+
+            battlefield.Reverse();
 
             return battlefield;
         }
