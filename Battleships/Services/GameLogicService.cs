@@ -63,7 +63,8 @@ namespace Battleships.Services
 
             //return battlePieces;
 
-            return _db.NavyBattlePieces.Where(x => x.UserGameId == ug.Id).OrderBy(x => new{  x.PosY, x.PosX } ).ToList(); //seřadit
+            //return _db.NavyBattlePieces.Where(x => x.UserGameId == ug.Id).OrderBy(x => new{  x.PosY, x.PosX } ).ToList(); //SPRÁVNĚ
+            return _db.NavyBattlePieces.Where(x => x.UserGameId == ug.Id).OrderBy(x => x.PosX).ThenBy(x => x.PosY).ToList(); //asi taky teď už
         }
 
         //metoda - vrací polepolí 

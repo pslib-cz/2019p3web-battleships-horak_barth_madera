@@ -16,7 +16,14 @@
     <div class="alert alert-light text-center" role="alert">
         Výpis z DB: (předělat do PartialView - upravit - přidat na ostatní stránky)
     </div>
-    <table>
+    
+    
+    <partial name="_Battlefield" model="Model.PlayingField" />
+    
+    
+    
+    
+    @*<table>
         @foreach (var item in Model.PlayingField)
         {
             <tr>
@@ -26,7 +33,7 @@
                 }               
             </tr>
         }
-    </table>
+    </table>*@
     <div class="text-center">
         <a class="btn btn-primary" asp-page="Index">Cancel</a>
         <a class="btn btn-primary" asp-page="Game">Done</a>

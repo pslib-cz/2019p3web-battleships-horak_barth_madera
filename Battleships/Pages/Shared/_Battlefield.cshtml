@@ -1,0 +1,18 @@
+﻿@page
+
+
+@using Models
+@model List<List<NavyBattlePiece>>
+
+
+<table>
+    @foreach (var item in Model)
+    {
+        <tr>
+            @foreach (var item2 in item)
+            {
+                <td>@item2.PosX - @item2.PosY</td>
+            }
+        </tr>
+    }
+</table>
