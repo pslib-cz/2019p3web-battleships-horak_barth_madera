@@ -1,9 +1,9 @@
-﻿@using Models
-@model List<List<NavyBattlePiece>>
+﻿@using ViewModels
+@model BattlefieldPartialModel
 
 
 <table>
-    @foreach (var item in Model)
+    @foreach (var item in Model._battlefield)
     {
         <tr>
             @foreach (var item2 in item)
