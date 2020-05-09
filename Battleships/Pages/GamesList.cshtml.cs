@@ -12,23 +12,36 @@ namespace Battleships.Pages
 {
     public class GamesListModel : PageModel //Barth
     {
-        private ApplicationDbContext _db;
         private SessionStorage<Guid> _session;
+        private SessionStorage<string> _sessionString;
         public List<Game> AllGames;
         public List<Game> ActiveGames;
-        private IGamePreparation _gp;
 
-        public GamesListModel(ApplicationDbContext db, SessionStorage<Guid> session, IGamePreparation gp)
+        private IGamePreparation _gp;
+        private IMainMenu _mm;
+
+        [TempData]
+        public string Message { get; set; }
+
+        public GamesListModel(SessionStorage<Guid> session, SessionStorage<string> sessionString, IGamePreparation gp, IMainMenu mm)
         {
-            _db = db;
             _session = session;
             _gp = gp;
+            _mm = mm;
+            _sessionString = sessionString;
             AllGames = _gp.LoadAllGames();
             ActiveGames = _gp.LoadActiveGames();
         }
 
         public void OnGet()
         {
+        }
+
+        public void OnGetRemove(Guid value)
+        {
+            _mm.DeleteGame(value);
+            Message = _sessionString.Load("Message");
+            Page();
         }
 
         private ActionResult OnGetEnterGame(Guid value)

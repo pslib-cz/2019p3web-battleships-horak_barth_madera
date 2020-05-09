@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace Battleships.Services
 {
-    interface IMainMenu //připojení do hry, vytvoření hry, zobrazení hry, vypisování her
+    public interface IMainMenu //připojení do hry, vytvoření hry, zobrazení hry, vypisování her
     {
-        Game GetGame();
-
-        bool CreateGame();
-        bool DeleteGame();
+        Game GetGame(Guid value);
+        void DeleteGame(Guid value);
         void JoinGame();
     }
 }

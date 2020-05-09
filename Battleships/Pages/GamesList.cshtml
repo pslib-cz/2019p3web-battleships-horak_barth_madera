@@ -4,23 +4,39 @@
     ViewData["Title"] = "GamesList";
 }
 
+@{
+    if (TempData.Peek("Message") != null)
+    {
+
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            @TempData.Peek("Message")
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+}
+
 <h1>GamesList</h1>
 <table>
-    <h3>Všechny hry</h3>
+    <tr>Všechny hry
+    <tr />
     @foreach (var item in Model.AllGames)
     {
         <tr>
             <td><i>@item.GameId</i></td>
             <td><a class="btn btn-primary" asp-page-handler="EnterGame" asp-route-value="@item.GameId">Enter this game</a></td>
+            <td><a class="btn btn-danger" asp-page-handler="RemoveGame" asp-route-value="@item.GameId">Remove</a></td>
         </tr>
     }
 
-    <h3>Hry, kde jste na tahu</h3>
+    <tr>Hry, kde jste na tahu</tr>
     @foreach (var item in Model.ActiveGames)
     {
         <tr>
             <td><i>@item.GameId</i></td>
             <td><a class="btn btn-primary" asp-page-handler="EnterGame" asp-route-value="@item.GameId">Enter this game</a></td>
+            <td><a class="btn btn-danger" asp-page-handler="RemoveGame" asp-route-value="@item.GameId">Remove</a></td>
         </tr>
     }
 </table>

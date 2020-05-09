@@ -43,7 +43,6 @@ namespace Battleships.Services
             _db.UserGames.Add(ug);
             _db.SaveChanges();
 
-            //P.H. 26.4. - Vytvoření hracího pole
             _gameLogicService.CreateBattleField(ug);
         }
 
