@@ -27,5 +27,11 @@ namespace Battleships.Pages
         public void OnGet()
         {
         }
+
+        public void OnGetTileAction(Guid gameId, int _x, int _y)
+        {
+            gameId = _gameId;
+            _gp.TileAction(gameId, _x, _y);
+        }
     }
 }

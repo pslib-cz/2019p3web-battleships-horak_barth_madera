@@ -21,7 +21,7 @@
             <tr>
                 @for (var d = 0; d < Model.LoadedGame.GameSize; d++)
                 {
-                <td>x = @d; y = @i; </td>
+                    <td><a asp-page-handler="TileAction" asp-route-x="@d" asp-route-y="@i">x = @d; y = @i; </a></td>
                 }
             </tr>
         }

@@ -15,5 +15,7 @@ namespace Battleships.Services
         List<Game> LoadActiveGames();
 
         Game LoadGame(Guid value);
+
+        void TileAction(Guid gameId, int _x, int _y);
     }
 }

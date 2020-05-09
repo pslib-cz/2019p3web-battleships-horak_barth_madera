@@ -72,5 +72,15 @@ namespace Battleships.Services
 
             return game;
         }
+
+        public void TileAction(Guid gameId, int _x, int _y)
+        {
+            var ug = _db.UserGames.SingleOrDefault(x => x.GameId == gameId);
+            var NavyBattlePieceLoad = _db.NavyBattlePieces.SingleOrDefault(b => b.UserGameId == ug.Id);
+            var x = NavyBattlePieceLoad.PosX;
+            var y = NavyBattlePieceLoad.PosY;
+
+            //
+        }
     }
 }
