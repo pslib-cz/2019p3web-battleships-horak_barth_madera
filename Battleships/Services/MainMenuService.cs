@@ -29,7 +29,7 @@ namespace Battleships.Services
 
             _db.SaveChanges();
 
-            if (!_db.Games.Contains(tempGame))
+            if (!(_db.Games.Contains(tempGame) || _db.UserGames.Contains(ug) /* || _db.NavyBattlePieces.Contains(nbp)*/))
             {
                 _session.Save("Message", $"Hra {tempGame} byla úspěšně smazána.");
             } else
