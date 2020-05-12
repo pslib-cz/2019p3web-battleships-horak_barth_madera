@@ -10,11 +10,14 @@ namespace Battleships.Services
     {
 
 
-        void CreateBattleField(UserGame userGame); 
+        
         Game GetGame(Guid gameId);
         Game GetGame(int userGameId);
+        User GetUser(string userId);
+        void CreateBattleField(UserGame userGame);
         NavyBattlePiece GetNavyBattlePiece(Guid gameId); 
         List<NavyBattlePiece> GetBattlePieces(Guid gameId);
         List<List<NavyBattlePiece>> GetBattlefield(Guid gameId);
+        bool JoinGame(Game game);
     }
 }

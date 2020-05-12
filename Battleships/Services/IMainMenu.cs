@@ -10,6 +10,6 @@ namespace Battleships.Services
     {
         Game GetGame(Guid value);
         void DeleteGame(Guid value);
-        void JoinGame();
+  
     }
 }

@@ -46,9 +46,9 @@ namespace Battleships.Services
             _gameLogicService.CreateBattleField(ug);
         }
 
-        public List<Game> LoadAllGames()
+        public List<Game> LoadAllGames() // Upravil jsem tak aby se zobrazovaly jen hry ve fázi setupu, kvůli připojení 
         {
-            return _db.Games.ToList();
+            return _db.Games.Where(x => x.GameState == Models.Enums.GameState.Setup).ToList();
         }
 
         public List<Game> LoadActiveGames()

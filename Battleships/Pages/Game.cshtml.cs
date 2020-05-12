@@ -21,20 +21,20 @@ namespace Battleships.Pages
         public List<List<NavyBattlePiece>> PlayingField;
         
 
-        public GameModel(IGame game, SessionStorage<Guid> sessionGuid, BattlefieldPartialModel partial)
+        public GameModel(IGame game, SessionStorage<Guid> sessionGuid)
         {           
             _gameService = game;
             _sessionGuid = sessionGuid;            
             _gameId = sessionGuid.Load("GameId");
-            partialModel = partial;
+            
         }
 
         public void OnGet()
         {
-            PlayingField = _gameService.GetBattlefield(_gameId);
+            partialModel = new BattlefieldPartialModel(_gameService.GetBattlefield(_gameId), _gameService.GetGame(_gameId));            
             Game = _gameService.GetGame(_gameId);
 
-            partialModel._battlefield = PlayingField;
+            
         }
     }
 }

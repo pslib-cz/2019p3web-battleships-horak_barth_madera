@@ -1,0 +1,43 @@
+﻿@page
+@model PrivacyModel
+@{
+    ViewData["Title"] = "Games List";
+}
+
+
+
+<img src="~/images/logo.png" alt="Alternate Text" class="center" />
+<h1 class="text-center">Games list</h1>
+<div class="alert alert-light text-center" role="alert">
+    Games you can join: (Setup)
+</div>
+
+
+<table class="table table-striped table-hover">
+
+    @foreach (var item in Model.AllGames)
+    {
+        <tr>
+            <td>Owner: <i>@Model._ga.GetUser(item.OwnerId).UserName</i></td>
+            <td><i>@item.GameState</i></td>
+            <td><a class="btn btn-primary" asp-page-handler="EnterGame" asp-route-value="@item.GameId">Enter this game</a></td>
+            <td><a class="btn btn-danger" asp-page-handler="RemoveGame" asp-route-value="@item.GameId">Remove</a></td>
+        </tr>
+    }
+</table>
+
+@*<div class="alert alert-light text-center" role="alert">
+    Games you :
+</div>
+
+<table class="table table-info">    
+    @foreach (var item in Model.ActiveGames)
+    {
+        <tr>
+            <td><i>@item.GameId</i></td>
+            <td><i>@item.GameState</i></td>
+            <td><a class="btn btn-primary" asp-page-handler="EnterGame" asp-route-value="@item.GameId">Enter this game</a></td>
+            <td><a class="btn btn-danger" asp-page-handler="RemoveGame" asp-route-value="@item.GameId">Remove</a></td>
+        </tr>
+    }
+</table>*@

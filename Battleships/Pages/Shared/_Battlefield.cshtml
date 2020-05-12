@@ -2,14 +2,26 @@
 @model BattlefieldPartialModel
 
 
-<table>
-    @foreach (var item in Model._battlefield)
+@{  if (Model.Game.GameState == Battleships.Models.Enums.GameState.Setup)
     {
-        <tr>
-            @foreach (var item2 in item)
+        <table class="bftable">
+            @foreach (var item in Model.Battlefield)
             {
-                <td>@item2.PosX - @item2.PosY</td>
+                <tr>
+                    @foreach (var item2 in item)
+                    {
+                        <td class="bftd">@item2.PosX - @item2.PosY</td>
+                    }
+                </tr>
             }
-        </tr>
+        </table>
     }
-</table>
+    else if (Model.Game.GameState == Battleships.Models.Enums.GameState.Battle)
+    {
+
+    }
+    else if (Model.Game.GameState == Battleships.Models.Enums.GameState.Ending)
+    {
+
+    }
+ }
