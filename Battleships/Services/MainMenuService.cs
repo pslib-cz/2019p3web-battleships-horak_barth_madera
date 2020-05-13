@@ -17,7 +17,7 @@ namespace Battleships.Services
             
         }
 
-        public void DeleteGame(Guid value)
+        public void DeleteGame(Guid value) //PH
         {
             var tempGame = _db.Games.SingleOrDefault(x => x.GameId == value);
             var ug = _db.UserGames.Where(x => x.GameId == value).ToList(); // Where místo singleordefault
@@ -49,16 +49,7 @@ namespace Battleships.Services
             }
             
             
-            _db.SaveChanges();
-
-            //if (!(_db.Games.Contains(tempGame) || _db.UserGames.Contains(ug) /* || _db.NavyBattlePieces.Contains(nbp)*/))
-            //{
-            //    _session.Save("Message", $"Hra {tempGame} byla úspěšně smazána.");
-            //}
-            //else
-            //{
-            //    _session.Save("Message", $"Hra {tempGame} nebyla smazána.");
-            //}
+            _db.SaveChanges();            
         }
 
         public Game GetGame(Guid value)

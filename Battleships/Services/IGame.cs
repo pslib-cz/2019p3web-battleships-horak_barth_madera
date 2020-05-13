@@ -15,6 +15,7 @@ namespace Battleships.Services
         Game GetGame(int userGameId);
         UserGame GetUserGame(Guid gameId);
         User GetUser(string userId);
+        string GetUserName(string userId);
         void CreateBattleField(UserGame userGame);
         NavyBattlePiece GetNavyBattlePiece(Guid gameId); 
         List<NavyBattlePiece> GetBattlePieces(Guid gameId);

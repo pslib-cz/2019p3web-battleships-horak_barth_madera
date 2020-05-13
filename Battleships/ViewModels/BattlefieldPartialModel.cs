@@ -1,4 +1,5 @@
 ﻿using Battleships.Models;
+using Battleships.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +11,14 @@ namespace Battleships.ViewModels
     {
         public List<List<NavyBattlePiece>> Battlefield { get; }
         public Game Game { get; }
-        public UserGame Ug { get; }
 
+        public IGame _gl;
 
-        public BattlefieldPartialModel(List<List<NavyBattlePiece>> bf, Game game, UserGame ug)
+        public BattlefieldPartialModel(List<List<NavyBattlePiece>> bf, Game game, IGame gl)
         {
             Battlefield = bf;
             Game = game;
-            Ug = ug;
+            _gl = gl;
         }
     }
 }

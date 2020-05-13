@@ -38,10 +38,18 @@ namespace Battleships.Models
 
 
             modelBuilder.Entity<Game>()
-                .HasMany(g => g.UserGames).WithOne(x => x.Game);
+                .HasMany(g => g.UserGames)
+                .WithOne(x => x.Game);
 
+                      
+            modelBuilder.Entity<User>()
+                .HasMany(g => g.Games) // UserGame
+                .WithOne(x => x.User);
+               
 
-
+            modelBuilder.Entity<User>() //kolekce userem vytvořených hry
+                .HasMany(g => g.Game)
+                .WithOne(x => x.User);
 
 
 

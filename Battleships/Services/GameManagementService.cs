@@ -32,13 +32,16 @@ namespace Battleships.Services
                 GameState = Models.Enums.GameState.Setup,
                 OwnerId = _activeUser,
                 CurrentPlayerId = _activeUser,
-                UserGames = new List<UserGame>()
+                
             };
 
             UserGame ug = new UserGame {
                 GameId = tempGame.GameId,
-                UserId = _activeUser };
+                UserId = _activeUser,
+                User = _gameLogicService.GetUser(_activeUser)
+            };
 
+            tempGame.UserGames = new List<UserGame>();
             tempGame.UserGames.Add(ug);
 
             _session.Save("GameId", tempGame.GameId);

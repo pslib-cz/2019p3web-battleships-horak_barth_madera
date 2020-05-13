@@ -31,7 +31,7 @@ namespace Battleships.Pages
 
         public void OnGet()
         {
-            partialModel = new BattlefieldPartialModel(_gameService.GetBattlefield(_gameId), _gameService.GetGame(_gameId), _gameService.GetUserGame(_gameId));            
+            partialModel = new BattlefieldPartialModel(_gameService.GetBattlefield(_gameId), _gameService.GetGame(_gameId), _gameService);            
             Game = _gameService.GetGame(_gameId);
 
             

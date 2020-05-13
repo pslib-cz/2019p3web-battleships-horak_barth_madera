@@ -1,4 +1,5 @@
 ﻿using Battleships.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,11 +37,19 @@ namespace Battleships.Services
         }
         public User GetUser(string userId)
         {
+            
+            
+                return _db.Users.SingleOrDefault(x => x.Id == userId);
+           
+            
+        }
+        public string GetUserName(string userId)
+        {
             if (userId != null)
             {
-                return _db.Users.SingleOrDefault(x => x.Id == userId);
+                return _db.Users.SingleOrDefault(x => x.Id == userId).UserName;
             }
-            return new User();
+            return "Velký špatný";
         }
 
 
@@ -70,10 +79,19 @@ namespace Battleships.Services
 
         public List<NavyBattlePiece> GetBattlePieces(Guid gameId)
         {
-            var ug = _db.UserGames.SingleOrDefault(x => x.GameId == gameId);
+            var ug = _db.UserGames.Where(x => x.GameId == gameId).ToList();
+
+            if (ug != null)
+            {
+                foreach (var item in ug)
+                {
+                    return _db.NavyBattlePieces.Where(x => x.UserGameId == item.Id).OrderBy(x => x.PosY).ThenBy(x => x.PosX).ToList();
+                }
+            }
+            throw new Exception();
 
             //return _db.NavyBattlePieces.Where(x => x.UserGameId == ug.Id).OrderBy(x => new{  x.PosY, x.PosX } ).ToList(); //SPRÁVNĚ
-            return _db.NavyBattlePieces.Where(x => x.UserGameId == ug.Id).OrderBy(x => x.PosY).ThenBy(x => x.PosX).ToList(); //asi taky teď už
+            //return _db.NavyBattlePieces.Where(x => x.UserGameId == ug.Id).OrderBy(x => x.PosY).ThenBy(x => x.PosX).ToList(); //asi taky teď už
         }
 
         //metoda - vrací polepolí 
@@ -104,6 +122,7 @@ namespace Battleships.Services
 
             battlefield.Reverse();
 
+
             return battlefield;
         }
 
@@ -111,24 +130,27 @@ namespace Battleships.Services
 
         public bool JoinGame(Guid gameId)
         {
-            var game = _db.Games.SingleOrDefault(x => x.GameId == gameId);
+            var game = _db.Games.Include(x => x.UserGames).SingleOrDefault(x => x.GameId == gameId);
+
             
 
             if (_activeUser == "") return false;
 
-            UserGame ug = new UserGame { Game = game, UserId = _activeUser };
+            UserGame ug = new UserGame { Game = game, UserId = _activeUser, User = GetUser(_activeUser) };
 
-            if (game.UserGames.Count() < game.MaxPlayers)
+            if (game.UserGames != null)
             {
-                game.UserGames.Add(ug);
+                if (game.UserGames.Count() < game.MaxPlayers)
+                {
+                    game.UserGames.Add(ug);
+                    _session.Save("GameId", game.GameId);
+                    _db.UserGames.Add(ug);
+                    CreateBattleField(ug);
+                    _db.SaveChanges();
+                    return true;
+                }
             }
-            
-
-            _session.Save("GameId", game.GameId);
-            _db.UserGames.Add(ug);
-            CreateBattleField(ug);
-            _db.SaveChanges();
-            return true;
+            return false;            
         }
     }
 }

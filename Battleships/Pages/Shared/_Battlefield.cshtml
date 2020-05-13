@@ -6,6 +6,10 @@
 @{
     foreach (var userGame in Model.Game.UserGames)
     {
+
+        <h4>@Model._gl.GetUserName(userGame.UserId)</h4>
+        
+        
         if (Model.Game.GameState == Battleships.Models.Enums.GameState.Setup)
         {
             <table class="bftable">
