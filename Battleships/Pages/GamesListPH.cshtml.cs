@@ -20,9 +20,6 @@ namespace Battleships.Pages
         private IMainMenu _mm;
         public IGame _ga;
 
-
-
-
         public PrivacyModel(SessionStorage<Guid> session, IGamePreparation gp, IGame ga, IMainMenu mm)
         {
             _session = session;
@@ -40,7 +37,6 @@ namespace Battleships.Pages
         public ActionResult OnGetRemoveGame(Guid value)
         {
             _mm.DeleteGame(value);
-
             AllGames = _gp.LoadAllGames();
             ActiveGames = _gp.LoadActiveGames();
             return Page();
@@ -49,7 +45,6 @@ namespace Battleships.Pages
         public ActionResult OnGetEnterGame(Guid value)
         {
             _ga.JoinGame(value);
-
             return RedirectToPage("./Game");
         }
     }

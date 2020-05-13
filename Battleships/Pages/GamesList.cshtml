@@ -4,19 +4,6 @@
     ViewData["Title"] = "GamesList";
 }
 
-@{
-    if (TempData.Peek("Message") != null)
-    {
-
-        <div class="alert alert-info alert-dismissible fade show" role="alert">
-            @TempData.Peek("Message")
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    }
-}
-
 <h1>GamesList</h1>
 <table>
     <tr>Všechny hry
