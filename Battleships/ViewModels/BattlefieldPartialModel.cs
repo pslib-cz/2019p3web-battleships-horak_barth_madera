@@ -10,11 +10,14 @@ namespace Battleships.ViewModels
     {
         public List<List<NavyBattlePiece>> Battlefield { get; }
         public Game Game { get; }
+        public UserGame Ug { get; }
 
-        public BattlefieldPartialModel(List<List<NavyBattlePiece>> bf, Game game)
+
+        public BattlefieldPartialModel(List<List<NavyBattlePiece>> bf, Game game, UserGame ug)
         {
             Battlefield = bf;
             Game = game;
+            Ug = ug;
         }
     }
 }

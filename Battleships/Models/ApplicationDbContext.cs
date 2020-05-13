@@ -34,8 +34,16 @@ namespace Battleships.Models
             .WithMany(g => g.UserGames)
             .HasForeignKey(ug => ug.GameId)
             .OnDelete(DeleteBehavior.NoAction);
-            
-            
+
+
+
+            modelBuilder.Entity<Game>()
+                .HasMany(g => g.UserGames).WithOne(x => x.Game);
+
+
+
+
+
 
             modelBuilder.Entity<NavyBattlePiece>().HasIndex(x => new { x.PosX, x.PosY });
         }

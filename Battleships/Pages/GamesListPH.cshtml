@@ -20,7 +20,9 @@
         <tr>
             <td>Owner: <i>@Model._ga.GetUser(item.OwnerId).UserName</i></td>
             <td><i>@item.GameState</i></td>
-            <td><a class="btn btn-primary" asp-page-handler="EnterGame" asp-route-value="@item.GameId">Enter this game</a></td>
+            <td><i>@item.GameSize</i></td>
+
+            <td><a class="btn btn-primary" asp-page-handler="EnterGame" asp-route-value="@item.GameId">Join</a></td>
             <td><a class="btn btn-danger" asp-page-handler="RemoveGame" asp-route-value="@item.GameId">Remove</a></td>
         </tr>
     }

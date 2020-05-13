@@ -30,6 +30,10 @@ namespace Battleships.Services
             var ug = _db.UserGames.SingleOrDefault(x => x.Id == userGameId);
             return _db.Games.SingleOrDefault(y => y.GameId == ug.GameId);
         }
+        public UserGame GetUserGame(Guid gameId)
+        {           
+            return _db.UserGames.SingleOrDefault(x => x.GameId == gameId);           
+        }
         public User GetUser(string userId)
         {
             if (userId != null)
@@ -105,11 +109,20 @@ namespace Battleships.Services
 
         #endregion 
 
-        public bool JoinGame(Game game)
+        public bool JoinGame(Guid gameId)
         {
+            var game = _db.Games.SingleOrDefault(x => x.GameId == gameId);
+            
+
             if (_activeUser == "") return false;
 
             UserGame ug = new UserGame { Game = game, UserId = _activeUser };
+
+            if (game.UserGames.Count() < game.MaxPlayers)
+            {
+                game.UserGames.Add(ug);
+            }
+            
 
             _session.Save("GameId", game.GameId);
             _db.UserGames.Add(ug);

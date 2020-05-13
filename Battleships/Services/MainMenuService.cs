@@ -20,23 +20,32 @@ namespace Battleships.Services
         public void DeleteGame(Guid value)
         {
             var tempGame = _db.Games.SingleOrDefault(x => x.GameId == value);
-            var ug = _db.UserGames.SingleOrDefault(x => x.GameId == value);
-            var nbp = _db.NavyBattlePieces.Where(x => x.UserGame == ug);
+            var ug = _db.UserGames.Where(x => x.GameId == value).ToList(); // Where místo singleordefault
+            
 
+
+            if (ug != null)
+            {
+                foreach (var item in ug)
+                {
+                    var nbp = _db.NavyBattlePieces.Where(x => x.UserGame == item).ToList();
+                    
+                    if (nbp != null)
+                    {
+                        foreach (var item2 in nbp)
+                        {
+                            _db.NavyBattlePieces.Remove(item2);
+                        }
+                    }
+
+                    _db.UserGames.Remove(item);
+                    
+                }
+                
+            }
             if (tempGame != null)
             {
                 _db.Games.Remove(tempGame);               
-            }
-            if (ug != null)
-            {
-                _db.UserGames.Remove(ug);
-            }
-            if (nbp != null)
-            {
-                foreach (var item in nbp)
-                {
-                    _db.NavyBattlePieces.Remove(item);
-                }
             }
             
             

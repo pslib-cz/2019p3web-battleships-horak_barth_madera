@@ -46,10 +46,11 @@ namespace Battleships.Pages
             return Page();
         }
 
-        private ActionResult OnGetEnterGame(Guid value)
+        public ActionResult OnGetEnterGame(Guid value)
         {
-            
-            return RedirectToPage("./GamePreparation");
+            _ga.JoinGame(value);
+
+            return RedirectToPage("./Game");
         }
     }
 }

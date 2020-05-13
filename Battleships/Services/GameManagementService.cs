@@ -31,12 +31,15 @@ namespace Battleships.Services
                 GameSize = gameSize,
                 GameState = Models.Enums.GameState.Setup,
                 OwnerId = _activeUser,
-                CurrentPlayerId = _activeUser
+                CurrentPlayerId = _activeUser,
+                UserGames = new List<UserGame>()
             };
 
             UserGame ug = new UserGame {
                 GameId = tempGame.GameId,
                 UserId = _activeUser };
+
+            tempGame.UserGames.Add(ug);
 
             _session.Save("GameId", tempGame.GameId);
             _db.Games.Add(tempGame);

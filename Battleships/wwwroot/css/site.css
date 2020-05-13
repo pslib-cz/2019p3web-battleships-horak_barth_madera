@@ -73,14 +73,15 @@ body {
 
 /*Border tabulky a vycentrování*/
 .bftd{
-    border:solid 1px;
+    border:solid 1px; 
     border-color: black;    
     width:auto;
     height: 40px;
 }
-.bftable {
+.bftable{
     margin: 0 auto;
 }
+
 
 /*Center obrázku*/
 .center {
