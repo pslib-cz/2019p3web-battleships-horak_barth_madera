@@ -7,10 +7,7 @@ using System.Threading.Tasks;
 namespace Battleships.Services
 {
     public interface IGame //hra, 2 hrací pole, připojení druhého hráče, konec hry
-    {
-
-
-        
+    {     
         Game GetGame(Guid gameId);
         Game GetGame(int userGameId);
         UserGame GetUserGame(Guid gameId);

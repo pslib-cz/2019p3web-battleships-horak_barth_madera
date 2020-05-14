@@ -23,12 +23,11 @@ namespace Battleships.Pages
         [TempData]
         public string Message { get; set; }
 
-        public GamesListModel(SessionStorage<Guid> session, SessionStorage<string> sessionString, IGamePreparation gp, IMainMenu mm)
+        public GamesListModel(SessionStorage<Guid> session, IGamePreparation gp, IMainMenu mm)
         {
             _session = session;
             _gp = gp;
             _mm = mm;
-            _sessionString = sessionString;
             AllGames = _gp.LoadAllGames();
             ActiveGames = _gp.LoadActiveGames();
         }
@@ -40,11 +39,10 @@ namespace Battleships.Pages
         public void OnGetRemove(Guid value)
         {
             _mm.DeleteGame(value);
-            Message = _sessionString.Load("Message");
             Page();
         }
 
-        private ActionResult OnGetEnterGame(Guid value)
+        public ActionResult OnGetEnterGame(Guid value)
         {
             _session.Save("EnterId", value);
             return RedirectToPage("./GamePreparation");

@@ -13,16 +13,13 @@ namespace Battleships.Services
 
         public MainMenuService(ApplicationDbContext db)
         {
-            _db = db;
-            
+            _db = db;  
         }
 
         public void DeleteGame(Guid value) //PH
         {
             var tempGame = _db.Games.SingleOrDefault(x => x.GameId == value);
-            var ug = _db.UserGames.Where(x => x.GameId == value).ToList(); // Where místo singleordefault
-            
-
+            var ug = _db.UserGames.Where(x => x.GameId == value).ToList(); // Where místo singleordefault     
 
             if (ug != null)
             {
@@ -37,17 +34,13 @@ namespace Battleships.Services
                             _db.NavyBattlePieces.Remove(item2);
                         }
                     }
-
-                    _db.UserGames.Remove(item);
-                    
-                }
-                
+                    _db.UserGames.Remove(item);                
+                }    
             }
             if (tempGame != null)
             {
                 _db.Games.Remove(tempGame);               
             }
-            
             
             _db.SaveChanges();            
         }
@@ -57,7 +50,5 @@ namespace Battleships.Services
             var ug = _db.Games.SingleOrDefault(x => x.GameId == value);
             return _db.Games.SingleOrDefault(x => x.GameId == ug.GameId);
         }
-
-
     }
 }

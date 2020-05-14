@@ -25,16 +25,13 @@ namespace Battleships.Pages
         {           
             _gameService = game;
             _sessionGuid = sessionGuid;            
-            _gameId = sessionGuid.Load("GameId");
-            
+            _gameId = sessionGuid.Load("GameId");       
         }
 
         public void OnGet()
         {
             partialModel = new BattlefieldPartialModel(_gameService.GetBattlefield(_gameId), _gameService.GetGame(_gameId), _gameService);            
-            Game = _gameService.GetGame(_gameId);
-
-            
+            Game = _gameService.GetGame(_gameId);          
         }
 
         public ActionResult OnGetPieceClick(int x, int y, UserGame ug)
