@@ -95,3 +95,61 @@ body {
 h6{
     text-align: center
 }
+
+/*Tlačítka*/
+.btn-group-vertical {
+    margin: 0 auto !important;
+    display: block !important;
+    width: 20%;
+    padding-top: 50px;
+}
+
+.btn-group-vertical a {
+    transition: all .2s ease-in-out;
+}
+
+.btn-group-vertical a:hover {
+    color: black !important;
+    background-color: #c0e0ff;
+    transform: scale(1.05);
+}
+
+/*Tabulka*/
+.game-list-table a, .game-prep a {
+    font-size: 13px;
+    font-weight: 700;
+    transition: all .2s ease-in-out;
+    padding-top: 3px;
+}
+
+.game-list-table .btn-primary:hover, .game-prep a:hover {
+    color: black !important;
+    background-color: #c0e0ff;
+    transform: scale(1.05);
+}
+
+.game-prep a {
+    font-size: 15px;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.game-list-table .btn-danger:hover {
+    color: black !important;
+    background-color: #ffc1e3;
+    transform: scale(1.05);
+}
+
+.game-list-table .head {
+    font-weight: 700;
+}
+
+.game-list-table {
+    border: 1px solid #dbdbdb
+}
+
+.game-list-title {
+    font-size: 20px;
+    font-weight: 700;
+    padding: 20px;
+}

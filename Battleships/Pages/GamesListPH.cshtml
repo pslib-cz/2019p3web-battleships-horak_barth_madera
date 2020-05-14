@@ -7,18 +7,21 @@
 
 
 <img src="~/images/logo.png" alt="Alternate Text" class="center" />
-<h1 class="text-center">Games list</h1>
-<div class="alert alert-light text-center" role="alert">
-    Games you can join: (Setup)
-</div>
+<p class="text-center game-list-title">Your listed games, feel free to choose.</p>
 
-
-<table class="table table-striped table-hover">
+<table class="table table-striped table-hover game-list-table">
+    <tr class="head">
+        <td>Owner:</td>
+        <td>Game State</td>
+        <td>Game Size</td>
+        <td>Join Game</td>
+        <td>Remove Game</td>
+    </tr>
 
     @foreach (var item in Model.AllGames)
     {
         <tr>
-            <td>Owner: @Model._ga.GetUserName(item.OwnerId)</td>
+            <td>@Model._ga.GetUserName(item.OwnerId)</td>
             <td>@item.GameState</td>
             <td>@item.GameSize</td>
 
