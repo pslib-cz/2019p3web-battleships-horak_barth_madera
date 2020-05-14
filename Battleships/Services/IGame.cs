@@ -21,5 +21,6 @@ namespace Battleships.Services
         List<NavyBattlePiece> GetBattlePieces(Guid gameId);
         List<List<NavyBattlePiece>> GetBattlefield(Guid gameId);
         bool JoinGame(Guid gameId);
+        bool PlaceShip(UserGame ug, int posX, int posY);
     }
 }

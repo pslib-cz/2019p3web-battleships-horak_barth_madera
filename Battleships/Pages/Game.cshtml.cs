@@ -36,5 +36,12 @@ namespace Battleships.Pages
 
             
         }
+
+        public ActionResult OnGetPieceClick(int x, int y, UserGame ug)
+        {
+            _gameService.PlaceShip(ug, x, y);
+            
+            return Page();
+        }
     }
 }

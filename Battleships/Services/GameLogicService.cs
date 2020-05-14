@@ -63,7 +63,7 @@ namespace Battleships.Services
             {
                 for (int y = 0; y < g.GameSize; y++)
                 {
-                    _db.NavyBattlePieces.Add(new NavyBattlePiece { UserGame = userGame, PosX = x, PosY = y, Hidden = true, });
+                    _db.NavyBattlePieces.Add(new NavyBattlePiece { UserGame = userGame, PosX = x, PosY = y, Hidden = true, PieceState = Models.Enums.PieceState.Water});
 
                 }
 
@@ -142,15 +142,32 @@ namespace Battleships.Services
             {
                 if (game.UserGames.Count() < game.MaxPlayers)
                 {
+                    _db.UserGames.Add(ug);
+                    //_db.SaveChanges();
                     game.UserGames.Add(ug);
                     _session.Save("GameId", game.GameId);
-                    _db.UserGames.Add(ug);
+                    
                     CreateBattleField(ug);
                     _db.SaveChanges();
                     return true;
                 }
             }
             return false;            
+        }
+
+        public bool PlaceShip(UserGame ug, int posX, int posY)
+        {
+            var nbpieces = _db.NavyBattlePieces.Include(x => x.UserGame).Where(x => x.UserGameId == ug.Id).ToList();
+            var piece = nbpieces.SingleOrDefault(x => x.PosX == posX);
+
+            piece.PieceState = Models.Enums.PieceState.Ship;
+
+            if (piece.PieceState == Models.Enums.PieceState.Ship)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

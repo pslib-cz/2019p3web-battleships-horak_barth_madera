@@ -43,13 +43,16 @@ namespace Battleships.Services
 
             tempGame.UserGames = new List<UserGame>();
             tempGame.UserGames.Add(ug);
-
+            
             _session.Save("GameId", tempGame.GameId);
+            
             _db.Games.Add(tempGame);
             _db.UserGames.Add(ug);
             _db.SaveChanges();
-
             _gameLogicService.CreateBattleField(ug);
+            _db.SaveChanges();
+
+            
         }
 
         public List<Game> LoadAllGames() // Upravil jsem tak aby se zobrazovaly jen hry ve fázi setupu, kvůli připojení 

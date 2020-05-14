@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Battleships.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -19,6 +20,7 @@ namespace Battleships.Models
         [ForeignKey("UserGameId")]
         public UserGame UserGame { get; set; }
 
+        public PieceState PieceState { get; set; }
         public bool Hidden { get; set; }
 
     }

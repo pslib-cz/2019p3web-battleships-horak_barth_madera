@@ -7,7 +7,7 @@
     foreach (var userGame in Model.Game.UserGames)
     {
 
-        <h4>@Model._gl.GetUserName(userGame.UserId)</h4>
+        <h6>@Model._gl.GetUserName(userGame.UserId)</h6>
         
         
         if (Model.Game.GameState == Battleships.Models.Enums.GameState.Setup)
@@ -18,7 +18,17 @@
                     <tr>
                         @foreach (var item2 in item)
                         {
-                            <td class="bftd">@item2.PosX - @item2.PosY</td>
+                            if (item2.PieceState == Models.Enums.PieceState.Water)
+                            {
+                                <td class="bftd bg-primary" style="color: white">
+                                    <a asp-page-handler="PieceClick" asp-route-x="@item2.PosX" asp-route-y="@item2.PosY" asp-route-ug="@userGame"><div style="width: 100%; height: 100%">@item2.PosX-@item2.PosY</div></a>
+                                </td>
+                            }
+                            if (item2.PieceState == Models.Enums.PieceState.Ship)
+                            {
+                                <td class="bftd bg-dark" style="color: white">@item2.PosX - @item2.PosY</td>
+                            }
+                            
                         }
                     </tr>
                 }
