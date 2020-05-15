@@ -21,7 +21,7 @@
                             if (item2.PieceState == Models.Enums.PieceState.Water)
                             {
                                 <td class="bftd bg-primary" style="color: white">
-                                    <a asp-page-handler="PieceClick" asp-route-x="@item2.PosX" asp-route-y="@item2.PosY" asp-route-ug="@userGame"><div style="width: 100%; height: 100%">@item2.PosX-@item2.PosY</div></a>
+                                    <a asp-page-handler="PieceClick" asp-route-x="@item2.PosX" asp-route-y="@item2.PosY" asp-route-ug="@userGame.Id"><div style="width: 100%; height: 100%">@item2.PosX-@item2.PosY</div></a>
                                 </td>
                             }
                             if (item2.PieceState == Models.Enums.PieceState.Ship)

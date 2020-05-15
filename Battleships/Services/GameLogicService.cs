@@ -143,7 +143,7 @@ namespace Battleships.Services
                 if (game.UserGames.Count() < game.MaxPlayers)
                 {
                     _db.UserGames.Add(ug);
-                    //_db.SaveChanges();
+                    _db.SaveChanges();
                     game.UserGames.Add(ug);
                     _session.Save("GameId", game.GameId);
                     
@@ -155,12 +155,14 @@ namespace Battleships.Services
             return false;            
         }
 
-        public bool PlaceShip(UserGame ug, int posX, int posY)
+        public bool PlaceShip(int ugId, int posX, int posY)
         {
-            var nbpieces = _db.NavyBattlePieces.Include(x => x.UserGame).Where(x => x.UserGameId == ug.Id).ToList();
-            var piece = nbpieces.SingleOrDefault(x => x.PosX == posX);
+            
+            var nbpieces = _db.NavyBattlePieces.Include(x => x.UserGame).Where(x => x.UserGameId == ugId).ToList();
+            var piece = nbpieces.SingleOrDefault(x => x.PosX == posX && x.PosY == posY);
 
             piece.PieceState = Models.Enums.PieceState.Ship;
+            _db.SaveChanges();
 
             if (piece.PieceState == Models.Enums.PieceState.Ship)
             {

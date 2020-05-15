@@ -34,8 +34,10 @@ namespace Battleships.Pages
             Game = _gameService.GetGame(_gameId);          
         }
 
-        public ActionResult OnGetPieceClick(int x, int y, UserGame ug)
+        public ActionResult OnGetPieceClick(int x, int y, int ug)
         {
+            partialModel = new BattlefieldPartialModel(_gameService.GetBattlefield(_gameId), _gameService.GetGame(_gameId), _gameService);
+            
             _gameService.PlaceShip(ug, x, y);
             
             return Page();
