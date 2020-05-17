@@ -5,82 +5,108 @@
 
 
 @{
-    foreach (var userGame in Model.Game.UserGames)
+
+
+
+
+
+    if (Model.Game.GameState == Battleships.Models.Enums.GameState.Setup)
     {
-        
-
-        <h6>@Model._gl.GetUserName(userGame.UserId)</h6>
 
 
-        if (Model.Game.GameState == Battleships.Models.Enums.GameState.Setup)
+
+        <h5 class="text-center">Place your ships</h5>
+
+
+        <table class="bftable">
+            @for (int i = 0; i < Math.Sqrt(Model._gl.GetUserGame(Model.Game.GameId).NavyBattlePieces.Count); i++)
+            {
+                <tr>
+
+                    @foreach (var item2 in Model._gl.GetUserGame(Model.Game.GameId).NavyBattlePieces.OrderBy(x => x.PosX).ThenByDescending(x => x.PosY).Where(x => x.PosY == i))
+                    {
+                        if (item2.PieceState == Models.Enums.PieceState.Water)
+                        {
+                            <td class="bftd bg-primary" style="color: white">
+                                <a asp-page-handler="PieceClick" asp-route-x="@item2.PosX" asp-route-y="@item2.PosY" asp-route-ug="@Model._gl.GetUserGame(Model.Game.GameId).Id"><div style="width: 100%; height: 100%">@item2.PosX-@item2.PosY</div></a>
+                            </td>
+
+                        }
+                        if (item2.PieceState == Models.Enums.PieceState.Ship)
+                        {
+                            <td class="bftd bg-dark" style="color: white">@item2.PosX - @item2.PosY</td>
+                        }
+
+                    }
+                </tr>
+            }
+        </table>
+
+        if (Model._gl.GetUserGame(Model.Game.GameId).PlayerState != Models.Enums.PlayerState.Playing)
         {
-            @*<table class="bftable">
-                    @foreach (var item in userGame.NavyBattlePieces.OrderBy(x => x.PosX).ThenBy(x => x.PosY).Where(x => x.PosX == 0))
+            <div class="text-center">
+                <a class="btn btn-primary" asp-page="Index">Cancel</a>
+                <a class="btn btn-primary" asp-page-handler="Done">Done</a>
+            </div>
+        }
+
+
+
+
+
+    }
+    else if (Model.Game.GameState == Battleships.Models.Enums.GameState.Battle)
+    {
+        foreach (var userGame in Model.Game.UserGames)
+        {
+            if (userGame.PlayerState == Models.Enums.PlayerState.Playing)
+            {
+                <h6>@Model._gl.GetUserName(userGame.UserId)</h6>
+
+                <table class="bftable">
+                    @for (int i = 0; i < Math.Sqrt(userGame.NavyBattlePieces.Count); i++)
                     {
                         <tr>
 
-                            @foreach (var item2 in userGame.NavyBattlePieces.OrderBy(x => x.PosX).ThenBy(x => x.PosY).Where(x => x.PosX == item.PosX))
+                            @foreach (var item2 in userGame.NavyBattlePieces.OrderBy(x => x.PosX).ThenByDescending(x => x.PosY).Where(x => x.PosY == i))
                             {
-                                if (item2.PieceState == Models.Enums.PieceState.Water)
+                                if (item2.Hidden != true && Model._gl.GetUser() == Model._gl.GetUser(item2.UserGame.UserId))
                                 {
-                                    <td class="bftd bg-primary" style="color: white">
-                                        <a asp-page-handler="PieceClick" asp-route-x="@item2.PosX" asp-route-y="@item2.PosY" asp-route-ug="@userGame.Id"><div style="width: 100%; height: 100%">@item2.PosX-@item2.PosY</div></a>
+                                    if (item2.PieceState == Models.Enums.PieceState.Water)
+                                    {
+                                        <td class="bftd bg-primary" style="color: white">
+                                            <a asp-page-handler="PieceClick" asp-route-x="@item2.PosX" asp-route-y="@item2.PosY" asp-route-ug="@userGame.Id"><div style="width: 100%; height: 100%">@item2.PosX-@item2.PosY</div></a>
+                                        </td>
+
+                                    }
+                                    if (item2.PieceState == Models.Enums.PieceState.Ship)
+                                    {
+                                        <td class="bftd bg-dark" style="color: white">@item2.PosX - @item2.PosY</td>
+                                    }
+                                }
+                                else if (item2.Hidden == false)
+                                {
+                                    <td class="bftd" style="color: white">
+                                        <a asp-page-handler="Fire" asp-route-x="@item2.PosX" asp-route-y="@item2.PosY" asp-route-ug="@userGame.Id"><div style="width: 100%; height: 100%"></div></a>
                                     </td>
                                 }
-                                if (item2.PieceState == Models.Enums.PieceState.Ship)
-                                {
-                                    <td class="bftd bg-dark" style="color: white">@item2.PosX - @item2.PosY</td>
-                                }
+
 
                             }
                         </tr>
                     }
-                </table>*@
+                </table>
+            }
 
 
-
-
-
-            <table class="bftable">
-                @for (int i = 0; i < Math.Sqrt(userGame.NavyBattlePieces.Count); i++)
-                {
-                    <tr>
-
-                        @foreach (var item2 in userGame.NavyBattlePieces.Where(x => x.PosY == i))
-                        {
-                            if (item2.PieceState == Models.Enums.PieceState.Water)
-                            {
-                                <td class="bftd bg-primary" style="color: white">
-                                    <a asp-page-handler="PieceClick" asp-route-x="@item2.PosX" asp-route-y="@item2.PosY" asp-route-ug="@userGame.Id"><div style="width: 100%; height: 100%">@item2.PosX-@item2.PosY</div></a>
-                                </td>
-
-                            }
-                            if (item2.PieceState == Models.Enums.PieceState.Ship)
-                            {
-                                <td class="bftd bg-dark" style="color: white">@item2.PosX - @item2.PosY</td>
-                            }
-
-                        }
-                    </tr>
-                }
-            </table>
-
-
-
-
-
-
-
-        }
-        else if (Model.Game.GameState == Battleships.Models.Enums.GameState.Battle)
-        {
-
-        }
-        else if (Model.Game.GameState == Battleships.Models.Enums.GameState.Ending)
-        {
 
         }
     }
+    else if (Model.Game.GameState == Battleships.Models.Enums.GameState.Ending)
+    {
+
+    }
+
 
 
 

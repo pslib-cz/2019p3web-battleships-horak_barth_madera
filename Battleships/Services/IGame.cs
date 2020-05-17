@@ -1,4 +1,5 @@
 ﻿using Battleships.Models;
+using Battleships.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace Battleships.Services
         Game GetGame(Guid gameId);
         Game GetGame(int userGameId);
         UserGame GetUserGame(Guid gameId);
+        User GetUser();
         User GetUser(string userId);
         string GetUserName(string userId);
         void CreateBattleField(UserGame userGame);
@@ -20,5 +22,7 @@ namespace Battleships.Services
         List<List<NavyBattlePiece>> GetBattlefield(List<NavyBattlePiece> nbpList);
         bool JoinGame(Guid gameId);
         bool PlaceShip(int ug, int posX, int posY);
+        void ChangePlayerState(UserGame Ug, PlayerState state);
+        void ChangeGameState(Guid game);
     }
 }

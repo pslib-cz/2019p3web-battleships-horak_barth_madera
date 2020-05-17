@@ -1,5 +1,7 @@
 ﻿using Battleships.Models;
+using Battleships.Models.Enums;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Schema;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +26,7 @@ namespace Battleships.Services
 
         public Game GetGame(Guid gameId)
         {
-            return _db.Games.Include(x => x.UserGames).SingleOrDefault(x => x.GameId == gameId);
+            return _db.Games.Include(x => x.UserGames).ThenInclude(x => x.NavyBattlePieces).SingleOrDefault(x => x.GameId == gameId);
         }
         public Game GetGame(int userGameId)
         {
@@ -33,15 +35,16 @@ namespace Battleships.Services
         }
         public UserGame GetUserGame(Guid gameId)
         {           
-            return _db.UserGames.SingleOrDefault(x => x.GameId == gameId);           
+            return _db.UserGames.SingleOrDefault(x => x.GameId == gameId && x.UserId == _activeUser);           
+        }
+
+        public User GetUser()
+        {
+            return _db.Users.SingleOrDefault(x => x.Id == _activeUser);
         }
         public User GetUser(string userId)
-        {
-            
-            
-                return _db.Users.SingleOrDefault(x => x.Id == userId);
-           
-            
+        {                       
+            return _db.Users.SingleOrDefault(x => x.Id == userId);                   
         }
         public string GetUserName(string userId)
         {
@@ -161,7 +164,9 @@ namespace Battleships.Services
             UserGame ug = new UserGame { 
                 GameId = game.GameId, 
                 UserId = _activeUser, 
-                User = GetUser(_activeUser) 
+                User = GetUser(_activeUser),
+                PlayerState = Models.Enums.PlayerState.ShipPlacing
+                
             };
 
             if (game.UserGames != null)
@@ -197,6 +202,21 @@ namespace Battleships.Services
             }
 
             return false;
+        }
+
+        public void ChangePlayerState(UserGame Ug, PlayerState state)
+        {
+            Ug.PlayerState = state;
+            _db.SaveChanges();
+        }
+        public void ChangeGameState(Guid game)
+        {
+            var g = GetGame(game);
+
+            if (g.UserGames.All(x => x.PlayerState == PlayerState.Playing) && g.UserGames.Count != 1)
+            {
+                g.GameState = GameState.Battle;
+            }
         }
     }
 }

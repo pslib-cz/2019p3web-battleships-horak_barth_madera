@@ -38,7 +38,8 @@ namespace Battleships.Services
             UserGame ug = new UserGame {
                 GameId = tempGame.GameId,
                 UserId = _activeUser,
-                User = _gameLogicService.GetUser(_activeUser)
+                User = _gameLogicService.GetUser(_activeUser),
+                PlayerState = Models.Enums.PlayerState.ShipPlacing
             };
 
             tempGame.UserGames = new List<UserGame>();
