@@ -24,7 +24,7 @@ namespace Battleships.Services
 
         public Game GetGame(Guid gameId)
         {
-            return _db.Games.SingleOrDefault(x => x.GameId == gameId);
+            return _db.Games.Include(x => x.UserGames).SingleOrDefault(x => x.GameId == gameId);
         }
         public Game GetGame(int userGameId)
         {
@@ -126,6 +126,28 @@ namespace Battleships.Services
             return battlefield;
         }
 
+        public List<List<NavyBattlePiece>> GetBattlefield(List<NavyBattlePiece> nbpList) //nefunkční řešení
+        {
+            List<List<NavyBattlePiece>> battlefield = new List<List<NavyBattlePiece>>();
+
+            nbpList.OrderBy(x => x.PosY).ThenBy(x => x.PosX).ToList();
+
+
+            for (int i = 0; i < Math.Sqrt(nbpList.Count); i++)
+            {
+                List<NavyBattlePiece> column = new List<NavyBattlePiece>();
+
+                foreach (var item in nbpList.Where(x => x.PosY == i).ToList())
+                {
+                    column.Add(item);
+                }
+                battlefield.Add(column);
+            }
+            battlefield.Reverse();
+
+            return battlefield;
+        }
+
         #endregion 
 
         public bool JoinGame(Guid gameId)
@@ -136,17 +158,22 @@ namespace Battleships.Services
 
             if (_activeUser == "") return false;
 
-            UserGame ug = new UserGame { Game = game, UserId = _activeUser, User = GetUser(_activeUser) };
+            UserGame ug = new UserGame { 
+                GameId = game.GameId, 
+                UserId = _activeUser, 
+                User = GetUser(_activeUser) 
+            };
 
             if (game.UserGames != null)
             {
                 if (game.UserGames.Count() < game.MaxPlayers)
                 {
-                    _db.UserGames.Add(ug);
-                    _db.SaveChanges();
+                    
+                    
                     game.UserGames.Add(ug);
                     _session.Save("GameId", game.GameId);
-                    
+                    _db.UserGames.Add(ug);
+                    _db.SaveChanges();
                     CreateBattleField(ug);
                     _db.SaveChanges();
                     return true;
