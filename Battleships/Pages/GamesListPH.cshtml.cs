@@ -20,6 +20,12 @@ namespace Battleships.Pages
         private IMainMenu _mm;
         public IGame _ga;
 
+        [TempData]
+        public string MessageSuccess { get; set; }
+        [TempData]
+        public string MessageError { get; set; }
+
+
         public PrivacyModel(SessionStorage<Guid> session, IGamePreparation gp, IGame ga, IMainMenu mm)
         {
             _session = session;
@@ -39,6 +45,8 @@ namespace Battleships.Pages
             _mm.DeleteGame(value);
             AllGames = _gp.LoadAllGames();
             ActiveGames = _gp.LoadActiveGames();
+
+            MessageSuccess += "success";
             return Page();
         }
 
