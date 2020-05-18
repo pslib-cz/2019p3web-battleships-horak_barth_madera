@@ -173,8 +173,8 @@ namespace Battleships.Services
             {
                 if (game.UserGames.Count() < game.MaxPlayers)
                 {
-                    
-                    
+                    _session.Save("GameId", gameId);
+
                     game.UserGames.Add(ug);
                     _session.Save("GameId", game.GameId);
                     _db.UserGames.Add(ug);
@@ -216,6 +216,7 @@ namespace Battleships.Services
             if (g.UserGames.All(x => x.PlayerState == PlayerState.Playing) && g.UserGames.Count != 1)
             {
                 g.GameState = GameState.Battle;
+                _db.SaveChanges();
             }
         }
     }

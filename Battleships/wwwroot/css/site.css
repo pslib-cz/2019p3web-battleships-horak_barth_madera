@@ -75,8 +75,8 @@ body {
 .bftd{
     border:solid 1px; 
     border-color: black;    
-    width:auto;
-    height: 40px;
+    min-width: 60px;
+    height: 60px;
 }
 .bftable{
     margin: 0 auto;

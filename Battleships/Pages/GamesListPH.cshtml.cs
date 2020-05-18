@@ -44,8 +44,9 @@ namespace Battleships.Pages
 
         public ActionResult OnGetEnterGame(Guid value)
         {
-            _session.Save("GameId", value);
+            
             _ga.JoinGame(value);
+            
             return RedirectToPage("./Game");
         }
     }

@@ -68,9 +68,9 @@
                     {
                         <tr>
 
-                            @foreach (var item2 in userGame.NavyBattlePieces.OrderBy(x => x.PosX).ThenByDescending(x => x.PosY).Where(x => x.PosY == i))
+                            @foreach (var item2 in userGame.NavyBattlePieces.OrderBy(x => x.PosX).ThenByDescending(x => x.PosY).Where(x => x.PosY == i).ToList())
                             {
-                                if (item2.Hidden != true && Model._gl.GetUser() == Model._gl.GetUser(item2.UserGame.UserId))
+                                if (item2.Hidden != true || Model._gl.GetUser() == Model._gl.GetUser(item2.UserGame.UserId))
                                 {
                                     if (item2.PieceState == Models.Enums.PieceState.Water)
                                     {
@@ -84,7 +84,7 @@
                                         <td class="bftd bg-dark" style="color: white">@item2.PosX - @item2.PosY</td>
                                     }
                                 }
-                                else if (item2.Hidden == false)
+                                else if (item2.Hidden == true)
                                 {
                                     <td class="bftd" style="color: white">
                                         <a asp-page-handler="Fire" asp-route-x="@item2.PosX" asp-route-y="@item2.PosY" asp-route-ug="@userGame.Id"><div style="width: 100%; height: 100%"></div></a>
