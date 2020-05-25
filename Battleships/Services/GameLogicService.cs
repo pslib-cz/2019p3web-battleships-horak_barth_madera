@@ -26,7 +26,8 @@ namespace Battleships.Services
 
         public Game GetGame(Guid gameId)
         {
-            return _db.Games.Include(x => x.UserGames).ThenInclude(x => x.NavyBattlePieces).SingleOrDefault(x => x.GameId == gameId);
+            
+            return _db.Games.Include(x => x.UserGames).ThenInclude(x => x.NavyBattlePieces).ThenInclude(x => x.UserGame.User).SingleOrDefault(x => x.GameId == gameId);
         }
         public Game GetGame(int userGameId)
         {
@@ -134,7 +135,8 @@ namespace Battleships.Services
         {
             List<List<NavyBattlePiece>> battlefield = new List<List<NavyBattlePiece>>();
 
-            nbpList.OrderBy(x => x.PosX).GroupBy(x => x.PosY).ToList();
+            nbpList.GroupBy(x => x.PosY).OrderBy(x => x.Key).ToList();
+            _db.SaveChanges();
 
 
             for (int i = 0; i < Math.Sqrt(nbpList.Count); i++)
@@ -190,17 +192,49 @@ namespace Battleships.Services
 
         public bool PlaceShip(int ugId, int posX, int posY)
         {
-            
+            var ug = _db.UserGames.Include(x => x.Game).ThenInclude(x => x.User).SingleOrDefault(x => x.Id == ugId);
             var nbpieces = _db.NavyBattlePieces.Include(x => x.UserGame).Where(x => x.UserGameId == ugId).ToList();
             var piece = nbpieces.SingleOrDefault(x => x.PosX == posX && x.PosY == posY);
 
-            piece.PieceState = Models.Enums.PieceState.Ship;
-            _db.SaveChanges();
-
-            if (piece.PieceState == Models.Enums.PieceState.Ship)
+            if (ug.PlayerState == PlayerState.ShipPlacing)
             {
-                return true;
+                if (piece.PieceState == PieceState.Water)
+                {
+                    piece.PieceState = PieceState.Ship;
+                    _db.SaveChanges();
+                    return true;
+                }
+                else if (piece.PieceState == PieceState.Ship)
+                {
+                    piece.PieceState = PieceState.Water;
+                    _db.SaveChanges();
+                    return true;
+                }
             }
+            else if (ug.PlayerState == PlayerState.Playing)
+            {
+                if (piece.PieceState == PieceState.Water)
+                {
+                    piece.Hidden = false;
+                    piece.PieceState = PieceState.DeadWater;
+                    _db.SaveChanges();
+                    return true;
+                }
+                else if (piece.PieceState == PieceState.Ship)
+                {
+                    piece.Hidden = false;
+                    piece.PieceState = PieceState.DeadShip;
+                    _db.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+                
+            }
+
+
 
             return false;
         }

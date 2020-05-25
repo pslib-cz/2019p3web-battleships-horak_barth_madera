@@ -39,28 +39,24 @@ namespace Battleships.Pages
             
             foreach (var item in Game.UserGames)
             {
-                partialModels.Add(new BattlefieldPartialModel(_gameService.GetBattlefield(item.NavyBattlePieces.ToList()), item, _gameService.GetUser()));
+                partialModels.Add(new BattlefieldPartialModel(_gameService.GetBattlefield(item.NavyBattlePieces.OrderBy(x => x.PosX).ToList()), item, _gameService.GetUser()));
             }
             
             Game = _gameService.GetGame(_gameId);
             _gameService.ChangeGameState(Game.GameId);
         }
 
-        public ActionResult OnGetDone()
-        {
-            partialModel = new BattlefieldPartialModel(_gameService.GetBattlefield(_gameService.GetUserGame(_gameId).NavyBattlePieces.ToList()), _gameService.GetUserGame(_gameId), _gameService.GetUser());
-            Game = _gameService.GetGame(_gameId);
-            _gameService.ChangePlayerState(_gameService.GetUserGame(Game.GameId), PlayerState.Playing);
-            _gameService.ChangeGameState(Game.GameId);
-            return Page();
-        }
 
-        public ActionResult OnGetFire()
-        {
-            partialModel = new BattlefieldPartialModel(_gameService.GetBattlefield(_gameService.GetUserGame(_gameId).NavyBattlePieces.ToList()), _gameService.GetUserGame(_gameId), _gameService.GetUser());
-            Game = _gameService.GetGame(_gameId);
 
-            //TODO
+        public ActionResult OnGetPieceClick(int x, int y, int ug)
+        {
+            _gameService.PlaceShip(ug, x, y);
+            Game = _gameService.GetGame(_gameId);
+            partialModels.Clear();
+            foreach (var item in Game.UserGames)
+            {
+                partialModels.Add(new BattlefieldPartialModel(_gameService.GetBattlefield(item.NavyBattlePieces.OrderBy(x => x.PosX).ToList()), item, _gameService.GetUser()));
+            }
 
             return Page();
         }

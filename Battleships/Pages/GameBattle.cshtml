@@ -4,15 +4,22 @@
     ViewData["Title"] = "GamesList";
 }
 
-   @if (Model.Game.GameState == Battleships.Models.Enums.GameState.Battle)
-    {
-        foreach (var pmodel in Model.partialModels)
+    @{  
+        if (Model.Game.GameState == Battleships.Models.Enums.GameState.Setup)
         {
-            if (pmodel.UserGame.PlayerState == Models.Enums.PlayerState.Playing)
+            <h2 class="text-center">Waiting for the other player to join...</h2>
+            <h4 class="text-center">Refresh the page</h4>
+        }
+        else if (Model.Game.GameState == Battleships.Models.Enums.GameState.Battle)
+        {
+            foreach (var pmodel in Model.partialModels)
             {
-                @*<h6>@pmodel.UserGame.User.UserName</h6>*@
-               
-                <partial name="_Battlefield" model="pmodel"  />
+                if (pmodel.UserGame.PlayerState == Models.Enums.PlayerState.Playing)
+                {
+                    <h6>@pmodel.UserGame.User.UserName</h6>
+
+                    <partial name="_Battlefield" model="pmodel" />
+                }
             }
         }
     }
