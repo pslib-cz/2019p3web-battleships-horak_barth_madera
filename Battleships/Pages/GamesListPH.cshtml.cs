@@ -55,7 +55,7 @@ namespace Battleships.Pages
             
             _ga.JoinGame(value);
             
-            return RedirectToPage("./Game");
+            return RedirectToPage("./GamePreparation");
         }
     }
 }

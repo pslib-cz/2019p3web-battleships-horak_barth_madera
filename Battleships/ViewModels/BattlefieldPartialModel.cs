@@ -10,15 +10,14 @@ namespace Battleships.ViewModels
     public class BattlefieldPartialModel
     {
         public List<List<NavyBattlePiece>> Battlefield { get; }
-        public Game Game { get; }
+        public UserGame UserGame { get; }
+        public User LoggedInUser { get; }
 
-        public IGame _gl;
-
-        public BattlefieldPartialModel(List<List<NavyBattlePiece>> bf, Game game, IGame gl)
+        public BattlefieldPartialModel(List<List<NavyBattlePiece>> bf, UserGame ug, User usr)
         {
             Battlefield = bf;
-            Game = game;
-            _gl = gl;
+            UserGame = ug;
+            LoggedInUser = usr;
         }
     }
 }

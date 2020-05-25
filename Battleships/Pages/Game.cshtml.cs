@@ -30,38 +30,38 @@ namespace Battleships.Pages
             Game = _gameService.GetGame(_gameId);
         }
 
-        public void OnGet()
-        {
-            partialModel = new BattlefieldPartialModel(_gameService.GetBattlefield(_gameId), _gameService.GetGame(_gameId), _gameService);
-            Game = _gameService.GetGame(_gameId);
-        }
+        //public void OnGet()
+        //{
+        //    partialModel = new BattlefieldPartialModel(_gameService.GetBattlefield(_gameId), _gameService.GetGame(_gameId), _gameService);
+        //    Game = _gameService.GetGame(_gameId);
+        //}
 
-        public ActionResult OnGetPieceClick(int x, int y, int ug)
-        {
-            partialModel = new BattlefieldPartialModel(_gameService.GetBattlefield(_gameId), _gameService.GetGame(_gameId), _gameService);
-            Game = _gameService.GetGame(_gameId);
-            _gameService.PlaceShip(ug, x, y);
+        //public ActionResult OnGetPieceClick(int x, int y, int ug)
+        //{
+        //    partialModel = new BattlefieldPartialModel(_gameService.GetBattlefield(_gameId), _gameService.GetGame(_gameId), _gameService);
+        //    Game = _gameService.GetGame(_gameId);
+        //    _gameService.PlaceShip(ug, x, y);
             
-            return Page();
-        }
+        //    return Page();
+        //}
 
-        public ActionResult OnGetDone()
-        {
-            partialModel = new BattlefieldPartialModel(_gameService.GetBattlefield(_gameId), _gameService.GetGame(_gameId), _gameService);
-            Game = _gameService.GetGame(_gameId);
-            _gameService.ChangePlayerState(_gameService.GetUserGame(Game.GameId), PlayerState.Playing);
-            _gameService.ChangeGameState(Game.GameId);
-            return Page();
-        }
+        //public ActionResult OnGetDone()
+        //{
+        //    partialModel = new BattlefieldPartialModel(_gameService.GetBattlefield(_gameId), _gameService.GetGame(_gameId), _gameService);
+        //    Game = _gameService.GetGame(_gameId);
+        //    _gameService.ChangePlayerState(_gameService.GetUserGame(Game.GameId), PlayerState.Playing);
+        //    _gameService.ChangeGameState(Game.GameId);
+        //    return Page();
+        //}
 
-        public ActionResult OnGetFire()
-        {
-            partialModel = new BattlefieldPartialModel(_gameService.GetBattlefield(_gameId), _gameService.GetGame(_gameId), _gameService);
-            Game = _gameService.GetGame(_gameId);
+        //public ActionResult OnGetFire()
+        //{
+        //    partialModel = new BattlefieldPartialModel(_gameService.GetBattlefield(_gameId), _gameService.GetGame(_gameId), _gameService);
+        //    Game = _gameService.GetGame(_gameId);
 
-            //TODO
+        //    //TODO
 
-            return Page();
-        }
+        //    return Page();
+        //}
     }
 }

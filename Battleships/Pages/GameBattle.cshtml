@@ -1,0 +1,18 @@
+﻿@page
+@model Battleships.Pages.GamesListModel
+@{
+    ViewData["Title"] = "GamesList";
+}
+
+   @if (Model.Game.GameState == Battleships.Models.Enums.GameState.Battle)
+    {
+        foreach (var pmodel in Model.partialModels)
+        {
+            if (pmodel.UserGame.PlayerState == Models.Enums.PlayerState.Playing)
+            {
+                @*<h6>@pmodel.UserGame.User.UserName</h6>*@
+               
+                <partial name="_Battlefield" model="pmodel"  />
+            }
+        }
+    }

@@ -33,6 +33,7 @@ namespace Battleships.Services
             var ug = _db.UserGames.SingleOrDefault(x => x.Id == userGameId);
             return _db.Games.SingleOrDefault(y => y.GameId == ug.GameId);
         }
+
         public UserGame GetUserGame(Guid gameId)
         {           
             return _db.UserGames.SingleOrDefault(x => x.GameId == gameId && x.UserId == _activeUser);           
@@ -133,7 +134,7 @@ namespace Battleships.Services
         {
             List<List<NavyBattlePiece>> battlefield = new List<List<NavyBattlePiece>>();
 
-            nbpList.OrderBy(x => x.PosY).ThenBy(x => x.PosX).ToList();
+            nbpList.OrderBy(x => x.PosX).GroupBy(x => x.PosY).ToList();
 
 
             for (int i = 0; i < Math.Sqrt(nbpList.Count); i++)
